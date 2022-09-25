@@ -1,0 +1,24 @@
+{
+  "name": "BeduBackend",
+  "version": "1.0.0",
+  "description": "## Como trabajar las ramas? 1. Tienes que ser invitado a trabajar al repositorio 2. Clonas el repositorio, te recomiendo que lo hagas a traves de SSH[^1]. 3. Creas tu rama, nombrala con tu nombre, ejemplo: `git checkout -b roge` 4. No olvides dejar mensajes descriptivos en el commit 5. Toda nueva funcionalidad tiene que incluir su respectiva prueba 6. Se tiene que trabajar con Test Driven Development[^2].",
+  "main": "index.js",
+  "scripts": {
+    "develop": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roge530/BeduBackend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/roge530/BeduBackend/issues"
+  },
+  "homepage": "https://github.com/roge530/BeduBackend#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "pg-promise": "^10.12.0"
+  }
+}
