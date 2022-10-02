@@ -15,12 +15,17 @@ export const Clients = sequelize.define('Clients', {
   last_name: {
     type: DataTypes.STRING
   },
+  password: {
+    type: DataTypes.STRING
+  },
   email: {
     type: DataTypes.STRING
   },
   phone: {
     type: DataTypes.STRING
-  } 
+  }
+}, {
+  timestamps: false
 })
 
 Clients.hasMany(Pets, {
