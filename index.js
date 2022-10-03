@@ -1,7 +1,9 @@
 const express = require('express')
+const sequelize = require('./config/db')
 const bodyParser = require('body-parser')
 const app = express()
 const PORT = 3000
+const routes = require('./routes/index');
 
 // middlewares
 app.use(bodyParser.json())
@@ -12,7 +14,15 @@ app.use(
 )
 
 // routes
-app.use(require('./routes/index'))
+app.use('/', routes);
+
+try {
+    sequelize.authenticate();
+    sequelize.sync();
+    console.log('Connected to DB');
+} catch (error) {
+    console.log('Unable to connect to DB:', error);
+}
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}.`)
