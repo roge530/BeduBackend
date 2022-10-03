@@ -11,12 +11,12 @@ const mascota = sequelize.define('mascota',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    especie: {
-        type: DataTypes.STRING,
+    especieId: {
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     subespecie: {
-        type: DataTypes.STRING
+        type: DataTypes.INTEGER
     },
     tamanio: {
         type: DataTypes.STRING
