@@ -29,6 +29,6 @@ export const Clients = sequelize.define('Clients', {
 })
 
 Clients.hasMany(Pets, {
-  foreignKey: 'owner',
+  foreignKey: 'id_client',
   sourceKey: 'id_client'
 })

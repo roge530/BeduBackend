@@ -15,9 +15,11 @@ export const Pets = sequelize.define('Pets', {
   race: {
     type: DataTypes.STRING
   }
+}, { 
+  timestamps: false
 })
 
 Pets.hasMany(Appointments, {
-  foreignKey: 'arrival',
+  foreignKey: 'id_pet',
   sourceKey: 'id_pet'
 })

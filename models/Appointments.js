@@ -14,6 +14,6 @@ export const Appointments = sequelize.define('Appointments', {
   time: {
     type: DataTypes.STRING
   }
+}, {
+  timestamps: false
 })
-
-

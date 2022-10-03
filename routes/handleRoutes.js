@@ -1,9 +1,20 @@
 import Router from 'express'
 const router = Router()
-import { registerClient  } from '../controllers/clients.js'
+import { 
+  registerClient,
+  registerLogin,
+  registerPet,
+  authToken
+} from '../controllers/clients.js'
+
+// CLIENTS DATABASE
+router.post('/register/client', registerClient )
+router.post('/register/login', registerLogin)
+
+// APPOINTMENTS AND PETS DATABASE
+router.post('/register/pet', authToken, registerPet)
 
 
-router.post('/register', registerClient)
 
 
 export default router
