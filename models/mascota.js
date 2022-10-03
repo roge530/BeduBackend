@@ -15,7 +15,7 @@ const mascota = sequelize.define('mascota',{
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    subespecie: {
+    subespecieId: {
         type: DataTypes.INTEGER
     },
     tamanio: {
