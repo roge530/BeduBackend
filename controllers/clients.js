@@ -1,6 +1,7 @@
 if (process.env.NODE_ENV != 'production') {
   dotenv.config()
 }
+
 import * as dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -63,7 +64,7 @@ export const authPassword = async (req, res) => {
   const { password } = req.body
 
   if (await bcrypt.compare(password, req.client.password)) {
-    const token = jwt.sign({username: req.client.email}, process.env.SECRET_KEY, {expiresIn: '300s'})
+    const token = jwt.sign({username: req.client.email}, process.env.SECRET_KEY, {expiresIn: '1h'})
     res.json({
       token:token,
       username: req.client.email
@@ -73,8 +74,22 @@ export const authPassword = async (req, res) => {
   }
 }
 
+export const authToken = (req, res, next) => {
+  const token = req.headers['authorization'].split(' ')[1]
+
+  if (token == null) res.sendStatus(401) 
+
+  try {
+    const verified = jwt.verify(token, process.env.SECRET_KEY)
+    req.verified = verified.username
+    next()
+  } catch(err) {
+    res.status(400).json({error: "Expired Token"})
+  }
+}
+
 export const authEmail = (req, res, next) => {
-  const username = req.body.username
+  const { username } = req.body
 
   if (username == req.verified) {
     next()
@@ -108,6 +123,7 @@ export const registerAppointment = async (req, res) => {
     const { day, time } = req.body
 
     const appointment = await Appointments.create({
+      id_client,
       id_pet: req.params.id_pet,
       day,
       time
@@ -120,27 +136,22 @@ export const registerAppointment = async (req, res) => {
 }
 }
 
-// export const appointments = async (req, res) => {
-//   
-//   const appointments = await Pets.findAll({
-//     include: Appointments
-//   })
-//
-//   res.json(appointments)
-// }
+export const appointments = async (req, res) => {
 
+  const appointments = await Clients.findOne({
+    attributes: ['id_client', 'first_name', 'last_name', 'email', 'phone'],
+    where: {
+      email: req.body.username
+    },
+    include: [{
+      model: Pets,
+      attributes: ['id_pet', 'pet_name', 'race'],
+      include: [{
+        model: Appointments,
+        attributes: ['id_appoint', 'day', 'time']
+      }]
+    }]
+  })
 
-export const authToken = (req, res, next) => {
-  const token = req.headers['authorization'].split(' ')[1]
-
-  if (token == null) res.sendStatus(401) 
-
-  try {
-    const verified = jwt.verify(token, process.env.SECRET_KEY)
-    req.verified = verified.username
-    next()
-  } catch(err) {
-    res.status(400).json({error: "Expired Token"})
-  }
+  res.json(appointments)
 }
-
