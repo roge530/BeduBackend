@@ -73,29 +73,32 @@ export const authPassword = async (req, res) => {
   }
 }
 
-export const registerPet = async (req, res) => {
+export const authEmail = (req, res, next) => {
   const username = req.body.username
 
   if (username == req.verified) {
-   const { pet_name, race } = req.body 
-
-    const { id_client } = await Clients.findOne({
-      where: {
-        email: username
-      }
-    })
-
-    const pet = await Pets.create({
-      id_client,
-      pet_name,
-      race
-    })
-
-    res.json(pet)
-
+    next()
   } else {
-    res.status(400).json({error: "Invalid Token"})
+    res.status(403).json({error: "Not authorized"})
   }
+}
+
+export const registerPet = async (req, res) => {
+  const { pet_name, race } = req.body 
+
+  const { id_client } = await Clients.findOne({
+    where: {
+      email: req.body.username
+    }
+  })
+
+  const pet = await Pets.create({
+    id_client,
+    pet_name,
+    race
+  })
+
+  res.json(pet)
 }
 
 //
