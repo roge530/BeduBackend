@@ -13,7 +13,7 @@ export const registerClient = async (req, res) => {
   try {
     const password = await bcrypt.hash(req.body.password, 10)
 
-    const client = await Clients.create({
+    const { id_client, first_name, last_name, email, phone } = await Clients.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       email: req.body.email,
@@ -21,82 +21,131 @@ export const registerClient = async (req, res) => {
       password: password
     })
 
-    res.json(client)
+
+    res.json({
+      id_client,
+      first_name,
+      last_name,
+      email,
+      phone
+    })
 
   } catch(err) {
     res.sendStatus(401)
   }
 }
 
-export const registerLogin = async (req, res) => {
+export const setUser = async (req, res, next) => {
   const { email, password } = req.body
 
-  if (!email || !password) return res.status(400).json({error: "Invalid field name"})
-
-  const client = await Clients.findOne({
-    where: {
-      email
-    }
-  }) 
-
-  if (client == null) {
-    res.status(400).json({error: "User not found"})
+  if (!email || !password) {
+    res.status(400).json({error: "An email and password needed to login"})
   } else {
-      if (await bcrypt.compare(password, client.password)) {
-        const token = jwt.sign({user: email}, process.env.SECRET_KEY, {expiresIn: '1d'})
-        res.send({token:token})
-      } else {
-        res.status(401).json({error: "Incorrect password"})
-    }
-  }  
-}
-
-export const registerPet = async (req, res) => {
-  const { pet_name, race, day, time } = req.body 
-  const { id_client } = await Clients.findOne({
-    where: {
-      email: req.user
-    }
-  })
-
-  const pet = await Pets.create({
-    pet_name,
-    race,
-    owner: id_client
-  })
-
-  const { id_pet } = pet
-
-  const appointment = await Appointments.create({
-    day,
-    time,
-    arrival: id_pet
-  })
-
-  const response = {
-    pet_name: pet.pet_name,
-    race: pet.race,
-    day: appointment.day,
-    time: appointment.time,
+    req.client = await Clients.findOne({
+      where: {
+        email
+      }
+    })
   }
 
-  res.json(response)
+  next()
 }
 
+export const authUser = async (req, res, next) => {
+  if (req.client == null) {
+    res.status(403)
+    return res.json({error: "User not found"})
+  }
+  next()
+}
 
+export const authPassword = async (req, res) => {
+  const { password } = req.body
 
-
-
-export const authToken = (req, res, next) => {
-  const token = req.headers['authorization']
-  if (token == null) res.sendStatus(401)
-
-  try {
-    const verified = jwt.verify(token, process.env.SECRET_KEY)
-    req.user = verified.user
-    next()
-  } catch(err) {
-    res.status(400).json({error: "Invalid Token"})
+  if (await bcrypt.compare(password, req.client.password)) {
+    const token = jwt.sign({email: req.client.email}, process.env.SECRET_KEY, {expiresIn: '2s'})
+    res.json({
+      token:token,
+      user: req.client.email
+    })
+  } else {
+    res.status(401).json({error: "Incorrect password"})
   }
 }
+
+
+
+
+
+
+
+
+
+
+// export const registerPet = async (req, res) => {
+//   try {
+//     const { pet_name, race } = req.body
+//
+//     const { id_client } = await Clients.findOne({
+//       where: {
+//         email: req.email
+//       }
+//     })
+//
+//     const pet = await Pets.create({
+//       id_client,
+//       pet_name,
+//       race
+//     })
+//
+//     res.json(pet)
+//
+//   } catch(err) {
+//     res.status(400).json({error: "Client not found"})
+//   }
+// }
+//
+//
+// export const registerAppointment = async (req, res) => {
+//   
+//   try {
+//     const { day, time } = req.body
+//
+//     const appointment = await Appointments.create({
+//       id_pet: req.params.id_pet,
+//       day,
+//       time
+//     })
+//
+//     res.json(appointment)
+//
+//   } catch(err) {
+//     res.status(400).json({error: "Pet not found"})
+// }
+// }
+//
+// export const appointments = async (req, res) => {
+//   
+//   const appointments = await Pets.findAll({
+//     include: Appointments
+//   })
+//
+//   res.json(appointments)
+// }
+//
+//
+//
+// export const authToken = (req, res, next) => {
+//   const token = req.headers['authorization'].split(' ')[1]
+//
+  // if (token == null) res.sendStatus(401) 
+  //
+  // try {
+  //   const verified = jwt.verify(token, process.env.SECRET_KEY)
+  //   console.log(verified)
+  //   next()
+  // } catch(err) {
+  //   res.status(400).json({error: "Invalid Token"})
+  // }
+// }
 
