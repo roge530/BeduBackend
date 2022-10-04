@@ -1,6 +1,8 @@
 const{Sequelize,DataTypes}= require ('sequelize');
 const sequelize = require ('../config/db');
 const crypto=require('crypto');
+const cita = require('./cita');
+const mascota = require('./mascota');
 
 const Cliente= sequelize.define('cliente',{
     nombre:{
@@ -74,4 +76,10 @@ Cliente.validatePassword = function (password, cliente_salt, cliente_hash){
 
 }
 
-module.exports =Cliente;
+ Cliente.hasMany(cita);
+ cita.belongsTo(Cliente);
+
+ Cliente.hasMany(mascota);
+ mascota.belongsTo(Cliente);
+
+module.exports = Cliente;

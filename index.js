@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const PORT = 3000
 const routes = require('./routes/index');
+const { Sequelize } = require('sequelize')
 
 // middlewares
 app.use(bodyParser.json())

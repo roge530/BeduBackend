@@ -10,7 +10,7 @@ const {
 
 router.get('/', getSubespecies);
 router.get('/:id', getSubespecie);
-router.get('/byEspecie/:id', getSubespecieByEspecie);
+router.get('/e/:id', getSubespecieByEspecie);
 router.post('/', createSubespecie);
 router.patch('/:id', updateSubespecie);
 router.delete('/:id', deleteSubespecie);

@@ -1,11 +1,11 @@
-const router=require('express').Router();
+const router = require('express').Router();
 
 const{
     signUp,
     logIn
-}=require('../controllers/cliente')
+} = require('../controllers/cliente')
 
-router.post('/signUp',signUp);
+router.post('/signUp', signUp);
 router.post('/logIn', logIn);
 
-module.exports =router;
+module.exports = router;

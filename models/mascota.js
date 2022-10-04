@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/db')
+const sequelize = require('../config/db');
+const cita = require('./cita');
 
 const mascota = sequelize.define('mascota',{
     id: {
@@ -25,5 +26,8 @@ const mascota = sequelize.define('mascota',{
         type: DataTypes.DOUBLE
     }
 })
+
+mascota.hasMany(cita);
+cita.belongsTo(mascota);
 
 module.exports = mascota;

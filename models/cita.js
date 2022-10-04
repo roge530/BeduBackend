@@ -11,3 +11,5 @@ const cita = sequelize.define('cita',{
         type: DataTypes.DATE
     }
 })
+
+module.exports = cita;
