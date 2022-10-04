@@ -4,7 +4,9 @@ import {
   registerClient,
   setUser,
   authUser,
-  authPassword
+  authPassword,
+  authToken,
+  registerPet
 } from '../controllers/clients.js'
 
 
@@ -13,7 +15,7 @@ router.post('/register/client', registerClient)
 router.post('/login', setUser, authUser, authPassword)
 
 // APPOINTMENTS AND PETS DATABASE
-// router.post('/register/pet' ,authToken, registerPet)
+router.post('/register/pet', authToken, registerPet)
 // router.post('/register/appointment/:id_pet', authToken, registerAppointment)
 
 

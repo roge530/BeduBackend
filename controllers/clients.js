@@ -63,48 +63,41 @@ export const authPassword = async (req, res) => {
   const { password } = req.body
 
   if (await bcrypt.compare(password, req.client.password)) {
-    const token = jwt.sign({email: req.client.email}, process.env.SECRET_KEY, {expiresIn: '2s'})
+    const token = jwt.sign({username: req.client.email}, process.env.SECRET_KEY, {expiresIn: '300s'})
     res.json({
       token:token,
-      user: req.client.email
+      username: req.client.email
     })
   } else {
     res.status(401).json({error: "Incorrect password"})
   }
 }
 
+export const registerPet = async (req, res) => {
+  const username = req.body.username
 
+  if (username == req.verified) {
+   const { pet_name, race } = req.body 
 
+    const { id_client } = await Clients.findOne({
+      where: {
+        email: username
+      }
+    })
 
+    const pet = await Pets.create({
+      id_client,
+      pet_name,
+      race
+    })
 
+    res.json(pet)
 
+  } else {
+    res.status(400).json({error: "Invalid Token"})
+  }
+}
 
-
-
-
-// export const registerPet = async (req, res) => {
-//   try {
-//     const { pet_name, race } = req.body
-//
-//     const { id_client } = await Clients.findOne({
-//       where: {
-//         email: req.email
-//       }
-//     })
-//
-//     const pet = await Pets.create({
-//       id_client,
-//       pet_name,
-//       race
-//     })
-//
-//     res.json(pet)
-//
-//   } catch(err) {
-//     res.status(400).json({error: "Client not found"})
-//   }
-// }
-//
 //
 // export const registerAppointment = async (req, res) => {
 //   
@@ -135,17 +128,17 @@ export const authPassword = async (req, res) => {
 //
 //
 //
-// export const authToken = (req, res, next) => {
-//   const token = req.headers['authorization'].split(' ')[1]
-//
-  // if (token == null) res.sendStatus(401) 
-  //
-  // try {
-  //   const verified = jwt.verify(token, process.env.SECRET_KEY)
-  //   console.log(verified)
-  //   next()
-  // } catch(err) {
-  //   res.status(400).json({error: "Invalid Token"})
-  // }
-// }
+export const authToken = (req, res, next) => {
+  const token = req.headers['authorization'].split(' ')[1]
+
+  if (token == null) res.sendStatus(401) 
+
+  try {
+    const verified = jwt.verify(token, process.env.SECRET_KEY)
+    req.verified = verified.username
+    next()
+  } catch(err) {
+    res.status(400).json({error: "Expired Token"})
+  }
+}
 
