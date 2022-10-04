@@ -7,7 +7,8 @@ import {
   authPassword,
   authToken,
   authEmail,
-  registerPet
+  registerPet,
+  registerAppointment
 } from '../controllers/clients.js'
 
 
@@ -17,7 +18,7 @@ router.post('/login', setUser, authUser, authPassword)
 
 // APPOINTMENTS AND PETS DATABASE
 router.post('/register/pet', authToken, authEmail, registerPet)
-// router.post('/register/appointment/:id_pet', authToken, registerAppointment)
+router.post('/register/appointment/:id_pet', authToken, authEmail, registerAppointment)
 
 
 

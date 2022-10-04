@@ -101,25 +101,25 @@ export const registerPet = async (req, res) => {
   res.json(pet)
 }
 
-//
-// export const registerAppointment = async (req, res) => {
-//   
-//   try {
-//     const { day, time } = req.body
-//
-//     const appointment = await Appointments.create({
-//       id_pet: req.params.id_pet,
-//       day,
-//       time
-//     })
-//
-//     res.json(appointment)
-//
-//   } catch(err) {
-//     res.status(400).json({error: "Pet not found"})
-// }
-// }
-//
+
+export const registerAppointment = async (req, res) => {
+  
+  try {
+    const { day, time } = req.body
+
+    const appointment = await Appointments.create({
+      id_pet: req.params.id_pet,
+      day,
+      time
+    })
+
+    res.json(appointment)
+
+  } catch(err) {
+    res.status(400).json({error: "Pet not found"})
+}
+}
+
 // export const appointments = async (req, res) => {
 //   
 //   const appointments = await Pets.findAll({
@@ -128,9 +128,8 @@ export const registerPet = async (req, res) => {
 //
 //   res.json(appointments)
 // }
-//
-//
-//
+
+
 export const authToken = (req, res, next) => {
   const token = req.headers['authorization'].split(' ')[1]
 
