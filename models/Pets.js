@@ -20,6 +20,15 @@ export const Pets = sequelize.define('Pets', {
 })
 
 Pets.hasMany(Appointments, {
-  foreignKey: 'id_pet',
-  sourceKey: 'id_pet'
+  foreignKey: {
+    name: 'id_pet',
+    allowNull: false
+  }
+})
+
+Appointments.belongsTo(Pets, {
+  foreignKey:{
+    name: 'id_pet',
+    allowNull: false
+  }
 })
