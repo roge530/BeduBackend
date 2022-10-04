@@ -128,7 +128,7 @@ export const registerAppointment = async (req, res) => {
     const { day, time } = req.body
 
     const appointment = await Appointments.create({
-      id_pet,
+      id_pet: req.params.id_pet,
       day,
       time
     })
