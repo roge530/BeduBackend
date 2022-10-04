@@ -99,32 +99,36 @@ export const authEmail = (req, res, next) => {
 }
 
 export const registerPet = async (req, res) => {
-  const { pet_name, race } = req.body 
+  try {
+    const { pet_name, race } = req.body 
 
-  const { id_client } = await Clients.findOne({
-    where: {
-      email: req.body.username
-    }
-  })
+    const { id_client } = await Clients.findOne({
+      where: {
+        email: req.body.username
+      }
+    })
 
-  const pet = await Pets.create({
-    id_client,
-    pet_name,
-    race
-  })
+    const pet = await Pets.create({
+      id_client,
+      pet_name,
+      race
+    })
 
-  res.json(pet)
+    res.json(pet)
+
+  } catch(err) {
+    res.status(400).json({error: "No user found"})
+  }
 }
 
 
 export const registerAppointment = async (req, res) => {
-  
+ 
   try {
     const { day, time } = req.body
 
     const appointment = await Appointments.create({
-      id_client,
-      id_pet: req.params.id_pet,
+      id_pet,
       day,
       time
     })
