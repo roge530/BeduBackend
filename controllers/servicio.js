@@ -1,16 +1,16 @@
-const servicio=require ('../models/servicio')
+const Servicio=require ('../models/servicio')
 
 //Create
 function createService (req,res){
     const body=req.body;
-    servicio.create(body).then(servicio=>{
+    Servicio.create(body).then(servicio=>{
         res.status(201).send(servicio);
     })
 }
 
 //Get
 async function getServices (req, res){
-    const servicios= await servicio.findAll();
+    const servicios= await Servicio.findAll();
     res.status(200).json(servicios);
 
 }
@@ -19,15 +19,15 @@ async function getServices (req, res){
 async function updateService (req,res){
     const id=req.params.id;
     const servicio=req.body;
-    await servicio.update(servicio, {where:{id}})
-    const servicioUpdated=await servicio.findByPk(id);
+    await Servicio.update(servicio, {where:{id}})
+    const servicioUpdated=await Servicio.findByPk(id);
     res.status(200).json(servicioUpdated)
 }
 
 //Delete
 async function deleteService(req,res){
     const id= req.params.id;
-    const deleted = servicio.destroy(
+    const deleted = Servicio.destroy(
         {where: {id}}
     );
     res.status(200).json(deleted);

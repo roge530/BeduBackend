@@ -25,12 +25,12 @@ async function signUp(req, res){
 async function logIn(req, res){
     
     const body =req.body;
-    const cliente = await Cliente.findOne({where:{ nombre: body['nombre']}});
+    const cliente = await Cliente.findOne({where:{ email: body['email']}});
     if (!cliente){
         return res.status(404).json({error: "Cliente no encontrado"});
 
     }
-    if (cliente.valiadatePassword(body['password'],cliente.password_salt,cliente.password_hash)){
+    if (Cliente.validatePassword(body['password'],cliente.password_salt,cliente.password_hash)){
         return res.status(200).json ({mensaje:"Bienvenido"});
     }else{
         return res.status(400).json({mensaje: "Password Incorrecto"})
