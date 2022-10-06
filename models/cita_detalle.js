@@ -2,6 +2,11 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/db')
 
 const cita_detalle = sequelize.define('cita_detalle',{
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     fecha: {
         type: DataTypes.DATE
     },
@@ -10,4 +15,6 @@ const cita_detalle = sequelize.define('cita_detalle',{
         allowNull: false,
         defaultValue: 1
     }
-})
+});
+
+module.exports = cita_detalle;
