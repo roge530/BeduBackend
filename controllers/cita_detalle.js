@@ -11,7 +11,7 @@ function createCita_detalle(req, res) {
 
 async function getCita_detalle(req, res) {
     const id = req.params.id;
-    const result = await cita_detalle.findAll({where: {citaId: id} });
+    const result = await cita_detalle.findAll({where: {citumId: id} });
     res.status(200).json(result);
 }
 
@@ -22,22 +22,38 @@ async function updateCita_detalle(req, res) {
     await cita_detalle.update(cita_detalleUpdate, {
         where: {
             [Op.and]: [
-                {citaId: citaId},
-                {productoId: productoId}
+                {citumId: citaId},
+                {servicioId: productoId}
             ]
             }});
     const updated = await cita_detalle.findAll({
         where: {
             [Op.and]: [
-                {citaId: citaId},
-                {productoId: productoId}
+                {citumId: citaId},
+                {servicioId: productoId}
             ]
             }});
     res.status(200).json(updated);
 }
 
+async function deleteCita_detalle(req, res) {
+    const citaId = req.params.citaId;
+    const servicioId = req.params.servicioId;
+    
+    const deletedCita_detalle= await cita_detalle.destroy( 
+        {where: {
+            [Op.and]: [
+                {citumId: citaId},
+                {servicioId: servicioId}
+            ]
+            }});
+    
+    res.status(200).json(deletedCita_detalle);
+}
+
 module.exports = {
     createCita_detalle,
     getCita_detalle,
-    updateCita_detalle
+    updateCita_detalle,
+    deleteCita_detalle
 }
