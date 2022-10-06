@@ -15,3 +15,5 @@ const subespecie = sequelize.define('subespecie',{
 
 
 module.exports = subespecie;
+
+//Verificar que exista especieId

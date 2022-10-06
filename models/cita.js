@@ -13,3 +13,5 @@ const cita = sequelize.define('cita',{
 })
 
 module.exports = cita;
+
+//Validar que exista el mascotumId y clienteId

@@ -18,3 +18,5 @@ const cita_detalle = sequelize.define('cita_detalle',{
 });
 
 module.exports = cita_detalle;
+
+//Validar que exista el citumId y servicioId

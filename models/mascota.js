@@ -31,3 +31,5 @@ mascota.hasMany(cita);
 cita.belongsTo(mascota);
 
 module.exports = mascota;
+
+//Validar que exista especieId, subespecieId, clienteId
