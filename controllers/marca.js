@@ -1,4 +1,5 @@
-const Marca=require ('../models/marca')
+// const Marca=require ('../models/marca')
+import { Marca } from '../models/marca'
 
 //Create
 function createBrand (req,res){
@@ -33,9 +34,9 @@ async function deleteBrand(req,res){
     res.status(200).json(deleted);
 }
 
-module.exports={
-    createBrand,
-    getBrands,
-    updateBrand,
-    deleteBrand
-}
+// module.exports={
+//     createBrand,
+//     getBrands,
+//     updateBrand,
+//     deleteBrand
+// }

@@ -1,4 +1,5 @@
-const cita = require('../models/cita');
+//const cita = require('../models/cita');
+import {cita} from '../models/cita'
 
 function createCita(req, res) {
     const body = req.body;
@@ -41,11 +42,11 @@ async function deleteCita(req, res) {
     res.status(200).json(deleted);
 }
 
-module.exports = {
-    createCita,
-    getCita,
-    updateCita,
-    deleteCita,
-    getCitasByCliente,
-    getCitasByMascota
-}
+// module.exports = {
+//     createCita,
+//     getCita,
+//     updateCita,
+//     deleteCita,
+//     getCitasByCliente,
+//     getCitasByMascota
+// }

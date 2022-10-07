@@ -1,6 +1,11 @@
-const { Op } = require('sequelize')
-const cita_detalle = require('../models/cita_detalle');
-const cita = require('../models/cita');
+// const { Op } = require('sequelize')
+// const cita_detalle = require('../models/cita_detalle');
+// const cita = require('../models/cita');
+
+import { Op } from 'sequelize' 
+import { cita_detalle } from '../models/cita_detalle'
+import { cita } from '../models/cita' 
+
 
 // function createCita_detalle(req, res) {
 //     const body = req.body;
@@ -176,9 +181,9 @@ async function deleteCita_detalle(req, res) {
     // }
 }
 
-module.exports = {
-    createCita_detalle,
-    getCita_detalle,
-    updateCita_detalle,
-    deleteCita_detalle
-}
+// module.exports = {
+//     createCita_detalle,
+//     getCita_detalle,
+//     updateCita_detalle,
+//     deleteCita_detalle
+// }

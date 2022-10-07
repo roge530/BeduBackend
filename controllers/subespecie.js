@@ -1,4 +1,5 @@
-const subespecie = require('../models/subespecie');
+// const subespecie = require('../models/subespecie');
+import { subespecie } from '../models/subespecie'
 
 function createSubespecie(req, res) {
     const body = req.body;
@@ -44,11 +45,11 @@ async function deleteSubespecie(req, res) {
     res.status(200).json(deleted);
 }
 
-module.exports = {
-    createSubespecie,
-    getSubespecie,
-    getSubespecies,
-    getSubespecieByEspecie,
-    updateSubespecie,
-    deleteSubespecie
-}
+// module.exports = {
+//     createSubespecie,
+//     getSubespecie,
+//     getSubespecies,
+//     getSubespecieByEspecie,
+//     updateSubespecie,
+//     deleteSubespecie
+// }

@@ -1,4 +1,5 @@
-const especie = require('../models/especie');
+// const especie = require('../models/especie');
+import {especie} from '../models/especie'
 
 function createEspecie(req, res) {
     const body = req.body;
@@ -34,10 +35,10 @@ async function deleteEspecie(req, res) {
     res.status(200).json(deleted);
 }
 
-module.exports = {
-    createEspecie,
-    getEspecie,
-    getEspecies,
-    updateEspecie,
-    deleteEspecie
-}
+// module.exports = {
+//     createEspecie,
+//     getEspecie,
+//     getEspecies,
+//     updateEspecie,
+//     deleteEspecie
+// }

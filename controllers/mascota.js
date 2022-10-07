@@ -1,4 +1,5 @@
-const mascota = require('../models/mascota');
+// const mascota = require('../models/mascota');
+import { mascota } from '../models/mascota'
 
 function createMascota(req, res) {
     const body = req.body;
@@ -34,9 +35,9 @@ async function deleteMascota(req, res) {
     res.status(200).json(deleted);
 }
 
-module.exports = {
-    createMascota,
-    getMascota,
-    updateMascota,
-    deleteMascota
-}
+// module.exports = {
+//     createMascota,
+//     getMascota,
+//     updateMascota,
+//     deleteMascota
+// }
