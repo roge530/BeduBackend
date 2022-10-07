@@ -1,10 +1,10 @@
-const{Sequelize,DataTypes}= require ('sequelize');
-const sequelize = require ('../config/db');
-const crypto=require('crypto');
-const cita = require('./cita');
-const mascota = require('./mascota');
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../config/db.js'
 
-const Cliente= sequelize.define('cliente',{
+import {cita} from './cita.js'
+import {mascota} from './mascota.js'
+
+export const Cliente= sequelize.define('cliente',{
     nombre:{
         type:DataTypes.STRING,
         allowNull: false,
@@ -58,28 +58,8 @@ const Cliente= sequelize.define('cliente',{
 
 })
 
-Cliente.createPassword = function(plainText){
-    const salt=crypto.randomBytes(16).toString('hex');
-    const hash=crypto
-       .pbkdf2Sync(plainText, salt, 10000,512, "sha512")
-       .toString("hex");
-
-   return {salt:salt , hash:hash}
-}
-
-Cliente.validatePassword = function (password, cliente_salt, cliente_hash){
-   const hash=crypto
-       .pbkdf2Sync(password,cliente_salt,10000,512,"sha512")
-       .toString("hex");
-
-    return cliente_hash === hash;
-
-}
-
  Cliente.hasMany(cita);
  cita.belongsTo(Cliente);
 
  Cliente.hasMany(mascota);
  mascota.belongsTo(Cliente);
-
-module.exports = Cliente;

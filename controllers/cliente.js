@@ -1,12 +1,11 @@
-const Cliente=require('../models/cliente');
+import {Cliente} from '../models/cliente.js'
 
-async function signUp(req, res){
+export const signUp = async (req, res) => {
     const body = req.body;
     try { 
         const cliente = await Cliente.create(body)
-        const {salt, hash }= Cliente.createPassword(body['password']);
-        cliente.password_salt=salt;
-        cliente.password_hash=hash;
+        cliente.password_salt='1';
+        cliente.password_hash='2';
         await cliente.save();
         res.status(201).json(cliente);
     } catch (err) {
@@ -22,7 +21,7 @@ async function signUp(req, res){
     }
 }
 
-async function logIn(req, res){
+export const logIn = async (req, res) => {
     
     const body =req.body;
     const cliente = await Cliente.findOne({where:{ email: body['email']}});
@@ -30,13 +29,4 @@ async function logIn(req, res){
         return res.status(404).json({error: "Cliente no encontrado"});
 
     }
-    if (Cliente.validatePassword(body['password'],cliente.password_salt,cliente.password_hash)){
-        return res.status(200).json ({mensaje:"Bienvenido"});
-    }else{
-        return res.status(400).json({mensaje: "Password Incorrecto"})
-    }
 }
-module.exports={
-        signUp,
-        logIn
-};

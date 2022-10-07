@@ -1,8 +1,8 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const subespecie = require('./subespecie');
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../config/db.js'
+import {subespecie} from './subespecie'
 
-const especie = sequelize.define('especie',{
+export const especie = sequelize.define('especie',{
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -16,5 +16,3 @@ const especie = sequelize.define('especie',{
 //Añadimos la relación 1 a muchos
 especie.hasMany(subespecie);
 subespecie.belongsTo(especie);
-
-module.exports = especie;
