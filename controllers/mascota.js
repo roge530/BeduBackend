@@ -13,6 +13,11 @@ async function getMascota(req, res) {
     res.status(200).json(result);
 }
 
+async function getMascotaByCliente(req, res) {
+    const id = req.params.id;
+    const result = await mascota.findAll({where: {clienteId: id} })
+}
+
 async function updateMascota(req, res) {
     const id = req.params.id;
     const mascotaUpdate = req.body;

@@ -6,18 +6,18 @@ const mascota = require('./mascota');
 
 const Cliente= sequelize.define('cliente',{
     nombre:{
-        type:DataTypes.CHAR(64),
+        type:DataTypes.STRING,
         allowNull: false,
 
     },
 
     apellido_paterno:{
-        type:DataTypes.CHAR(64),
+        type:DataTypes.STRING,
         allowNull: false,
     },
 
     apellido_materno:{
-        type:DataTypes.CHAR(64),
+        type:DataTypes.STRING,
         allowNull: false,
     },
 
@@ -39,7 +39,7 @@ const Cliente= sequelize.define('cliente',{
     },
 
     telefono:{
-        type:DataTypes.CHAR(64),
+        type:DataTypes.STRING,
         validate: {
             is:/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*/
         }

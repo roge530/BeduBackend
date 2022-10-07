@@ -2,7 +2,7 @@ const express = require('express')
 const sequelize = require('./config/db')
 const bodyParser = require('body-parser')
 const app = express()
-const PORT = 3000
+const PORT = 3300
 const routes = require('./routes/index');
 const { Sequelize } = require('sequelize')
 

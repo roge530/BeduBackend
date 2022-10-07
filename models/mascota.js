@@ -27,7 +27,6 @@ const mascota = sequelize.define('mascota',{
     }
 })
 
-mascota.hasMany(cita);
-cita.belongsTo(mascota);
+mascota.hasMany(cita, {foreignKey: 'mascotaId'});
 
 module.exports = mascota;

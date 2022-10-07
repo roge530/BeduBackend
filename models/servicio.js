@@ -16,7 +16,6 @@ const Servicio=sequelize.define('servicio',{
 
 })
 
-Servicio.belongsToMany(Cita,{through:Cita_detalle});
-Cita.belongsToMany(Servicio,{through:Cita_detalle});
+Cita.belongsToMany(Servicio,{through:Cita_detalle, foreignKey: 'citaId'});
 
 module.exports=Servicio;

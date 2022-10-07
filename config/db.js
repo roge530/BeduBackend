@@ -9,3 +9,8 @@ const sequelize = new Sequelize('postgres', 'postgres', 'password', {
 
   module.exports = sequelize;
   
+// const { Sequelize } = require('sequelize');
+
+// const sequelize = new Sequelize('sqlite://db.sqlite');
+
+// module.exports = sequelize;

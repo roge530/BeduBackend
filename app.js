@@ -14,7 +14,7 @@ try{
     console.log('Unable to connect to DB:' , error);
 }
 
-const PORT=3000; //process.env.PORT
+const PORT=33000; //process.env.PORT
 
 app.listen(PORT, ()=>{
     console.log("Server listening on PORT 3000");
