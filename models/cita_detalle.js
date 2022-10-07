@@ -13,10 +13,9 @@ const cita_detalle = sequelize.define('cita_detalle',{
     cantidad: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 1
+        defaultValue: 1,
+        validate: {
+            min: 1
+        }
     }
 });
-
-module.exports = cita_detalle;
-
-//Validar que exista el citumId y servicioId

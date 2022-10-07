@@ -1,10 +1,11 @@
-const express = require('express')
-const sequelize = require('./config/db')
-const bodyParser = require('body-parser')
+import express from 'express'
+import bodyParser from 'body-parser'
+import * as dotenv from 'dotenv-safe'
+dotenv.config()
 const app = express()
-const PORT = 3000
-const routes = require('./routes/index');
-const { Sequelize } = require('sequelize')
+const PORT = process.env.EXPRESS_PORT || 3000
+import { sequelize } from './config/db.js'
+import { routes } from './routes/index.js'
 
 // middlewares
 app.use(bodyParser.json())
@@ -17,14 +18,14 @@ app.use(
 // routes
 app.use('/', routes);
 
-try {
-    sequelize.authenticate();
-    sequelize.sync();
-    console.log('Connected to DB');
-} catch (error) {
-    console.log('Unable to connect to DB:', error);
+async function main() {
+    try {
+        await sequelize.sync()
+        app.listen(PORT, () => {
+            console.log(`App running on port ${PORT}.`)
+        })
+    } catch (error) {
+        console.error('Cannot connect to the database: ', error)
+    }
 }
-
-app.listen(PORT, () => {
-    console.log(`App running on port ${PORT}.`)
-})
+main()

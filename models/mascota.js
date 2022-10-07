@@ -1,8 +1,8 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/db');
-const cita = require('./cita');
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../config/db.js'
+import {cita} from './cita.js'
 
-const mascota = sequelize.define('mascota',{
+export const mascota = sequelize.define('mascota',{
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -27,9 +27,4 @@ const mascota = sequelize.define('mascota',{
     }
 })
 
-mascota.hasMany(cita);
-cita.belongsTo(mascota);
-
-module.exports = mascota;
-
-//Validar que exista especieId, subespecieId, clienteId
+mascota.hasMany(cita, {foreignKey: 'mascotaId'});

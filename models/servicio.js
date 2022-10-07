@@ -1,10 +1,10 @@
-const{Sequelize,DataTypes}= require ('sequelize');
-const sequelize = require ('../config/db');
-const Cita_detalle = require('./cita_detalle');
-const Cita = require('./cita');
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../config/db.js'
+import {Cita_detalle} from './cita_detalle'
+import {Cita} from './cita'
 
 
-const Servicio=sequelize.define('servicio',{
+export const Servicio=sequelize.define('servicio',{
     tipo:{
         type:DataTypes.TEXT,
         allowNull:false
@@ -16,7 +16,4 @@ const Servicio=sequelize.define('servicio',{
 
 })
 
-Servicio.belongsToMany(Cita,{through:Cita_detalle});
-Cita.belongsToMany(Servicio,{through:Cita_detalle});
-
-module.exports=Servicio;
+Cita.belongsToMany(Servicio,{through:Cita_detalle, foreignKey: 'citaId'});

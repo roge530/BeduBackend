@@ -1,7 +1,7 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/db')
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../config/db.js'
 
-const subespecie = sequelize.define('subespecie',{
+export const subespecie = sequelize.define('subespecie',{
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -11,9 +11,3 @@ const subespecie = sequelize.define('subespecie',{
         type: DataTypes.STRING
     }
 })
-
-
-
-module.exports = subespecie;
-
-//Verificar que exista especieId

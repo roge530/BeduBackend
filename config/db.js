@@ -1,11 +1,13 @@
-const { Sequelize } = require('sequelize')
+import {Sequelize} from 'sequelize'
+import * as dotenv from 'dotenv-safe'
+dotenv.config()
+let uri = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}` 
+export const sequelize = new Sequelize(uri)
 
-const sequelize = new Sequelize('postgres', 'postgres', 'password', {
-    host: 'localhost',
-    port: 5432,
-    dialect: 'postgres',
-    logging: false
-  })
-
-  module.exports = sequelize;
+  //module.exports = sequelize;
   
+// const { Sequelize } = require('sequelize');
+
+// const sequelize = new Sequelize('sqlite://db.sqlite');
+
+// module.exports = sequelize;

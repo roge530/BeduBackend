@@ -1,7 +1,7 @@
-const{Sequelize,DataTypes}= require ('sequelize');
-const sequelize = require ('../config/db');
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../config/db.js'
 
-const Marca=sequelize.define('marca',{
+export const Marca=sequelize.define('marca',{
     nombre:{
         type:DataTypes.CHAR(64),
         allowNull:false,
@@ -9,5 +9,3 @@ const Marca=sequelize.define('marca',{
     }
 
 })
-
-module.exports=Marca;
