@@ -2,62 +2,6 @@ const { Op } = require('sequelize')
 const cita_detalle = require('../models/cita_detalle');
 const cita = require('../models/cita');
 
-// function createCita_detalle(req, res) {
-//     const body = req.body;
-//     cita_detalle.create(body).then(cita_detalle => {
-//         res.status(201).json(cita_detalle);
-//     })
-//     .catch((err) => {
-//         if('SequelizeUniqueConstraintError'){
-//             cita_detalle.increment(
-//                 {cantidad: +1},
-//                 {where: 
-//                     {[Op.and]: [
-//                         {citaId: req.body['citaId']},
-//                         {servicioId: req.body['servicioId']}
-//                     ]}
-//                 }
-//             ).then(cita_detalle => {
-//                 res.status(201).json(cita_detalle.entries)
-//             })
-//         }
-//         if('SequelizeValidationError'){
-//             return res.status(400).json({
-//                 error: err.errors.map(e => e.message)
-//             })
-//         }
-//     });
-// }
-
-// async function createCita_detalle(req, res) {
-//     const body = req.body;
-//     const citaId = req.body['citaId'];
-//     const servicioId = req.body['servicioId'];
-//     const existe = await 
-//     cita_detalle.findOne(
-//         {where: 
-//             {[Op.and]: [
-//                 {citaId: req.body['citaId']},
-//                 {servicioId: req.body['servicioId']}
-//                 ]}
-//     });
-//     if(!existe) {
-//         const created = await cita_detalle.create(body);
-//         return res.status(201).json(created);
-//     }
-//     const updated = await 
-//     cita_detalle.increment(
-//         {cantidad: +1},
-//         {where: 
-//             {[Op.and]: [
-//                 {citaId: citaId},
-//                 {servicioId: servicioId}
-//             ]}
-//         }
-//     )
-//     return res.status(201).json(updated.entries)
-// }
-
 function createCita_detalle(req, res) {
     const body = req.body;
     const citaId = req.body['citaId'];
@@ -72,7 +16,7 @@ function createCita_detalle(req, res) {
         if(!founded) {
             cita_detalle.create(body)
                 .then(creado => {
-                    return res.status(201).json(creado);
+                    return res.status(201).send(creado);
                 })
                     .catch (err => {
                         if(["SequelizeValidationError", "SequelizeUniqueConstraintError", "SequelizeForeignKeyConstraintError"].includes(err.name)){
@@ -82,7 +26,7 @@ function createCita_detalle(req, res) {
                         }
                         else {
                             throw err;
-                            return
+                            
                         }
                     })
         }
@@ -96,7 +40,7 @@ function createCita_detalle(req, res) {
                     ]}
                 }
             ).then(actualizado => {
-                return res.status(201).json(actualizado)
+                return res.status(201).send(actualizado[0][0][0])
             })
         }
     })

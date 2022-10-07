@@ -58,7 +58,7 @@ const Cliente= sequelize.define('cliente',{
 
 })
 
-Cliente.createPassword =function(plainText){
+Cliente.createPassword = function(plainText){
     const salt=crypto.randomBytes(16).toString('hex');
     const hash=crypto
        .pbkdf2Sync(plainText, salt, 10000,512, "sha512")
