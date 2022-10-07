@@ -1,4 +1,5 @@
-const router = require('express').Router();
+import {Router} from 'express';
+const router = Router();
 const {
     createSubespecie,
     getSubespecie,
@@ -15,4 +16,4 @@ router.post('/', createSubespecie);
 router.patch('/:id', updateSubespecie);
 router.delete('/:id', deleteSubespecie);
 
-module.exports = router;
+export default router;

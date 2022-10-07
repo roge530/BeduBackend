@@ -1,14 +1,15 @@
-const router = require('express').Router();
-const {
+import {Router} from 'express';
+const router = Router();
+import {
     createMascota,
     getMascota,
     updateMascota,
     deleteMascota
-} = require('../controllers/mascota')
+} from '../controllers/mascota'
 
 router.get('/:id', getMascota);
 router.post('/', createMascota);
 router.patch('/:id', updateMascota);
 router.delete('/:id', deleteMascota);
 
-module.exports = router;
+export default router;

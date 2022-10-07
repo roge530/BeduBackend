@@ -1,14 +1,15 @@
-const router = require('express').Router();
-const{
-    createBrand,
-    getBrands,
-    updateBrand,
-    deleteBrand
-}=require('../controllers/marca')
+import {Router} from 'express';
+const router = Router();
+import {
+    createMarca,
+    getMarca,
+    updateMarca,
+    deleteMarca
+} from '../controllers/marca'
 
-router.get('/', getBrands);
-router.post('/',createBrand);
-router.patch('/:id',updateBrand);
-router.delete('/:id',deleteBrand);
+router.get('/', getMarca);
+router.post('/',createMarca);
+router.patch('/:id',updateMarca);
+router.delete('/:id',deleteMarca);
 
-module.exports=router;
+export default router;

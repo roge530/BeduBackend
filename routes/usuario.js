@@ -1,10 +1,11 @@
-const router = require('express').Router();
-const {
+import {Router} from 'express';
+const router = Router();
+import {
     createUsuario,
     getUsuarios,
     updateUsuario,
     deleteUsuario
-} = require('../controllers/usuario')
+} from '../controllers/usuario'
 
 router.get('/', getUsuarios);
 router.post('/', createUsuario);

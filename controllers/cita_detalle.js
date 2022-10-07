@@ -1,8 +1,8 @@
-const { Op } = require('sequelize')
-const cita_detalle = require('../models/cita_detalle');
-const cita = require('../models/cita');
+import { Op } from 'sequelize';
+import {cita_detalle} from '../models/cita_detalle';
 
-function createCita_detalle(req, res) {
+
+export const createCita_detalle = async (req, res) => {
     const body = req.body;
     const citaId = req.body['citaId'];
     const servicioId = req.body['servicioId'];
@@ -46,13 +46,13 @@ function createCita_detalle(req, res) {
     })
 }
 
-async function getCita_detalle(req, res) {
+export const getCita_detalle = async (req, res) => {
     const id = req.params.id;
     const result = await cita_detalle.findAll({where: {citaId: id} });
     res.status(200).json(result);
 }
 
-async function updateCita_detalle(req, res) {
+export const updateCita_detalle = async (req, res) => {
     const citaId = req.params.citaId;
     const servicioId = req.params.servicioId;
     const cita_detalleUpdate = req.body;
@@ -81,7 +81,7 @@ async function updateCita_detalle(req, res) {
     }
 }
 
-async function deleteCita_detalle(req, res) {
+export const deleteCita_detalle = async (req, res) => {
     const citaId = req.params.citaId;
     const servicioId = req.params.servicioId;
     let existe = { cantidad }
@@ -118,11 +118,4 @@ async function deleteCita_detalle(req, res) {
     //     )
     //     res.status(200).json(updated)
     // }
-}
-
-module.exports = {
-    createCita_detalle,
-    getCita_detalle,
-    updateCita_detalle,
-    deleteCita_detalle
 }

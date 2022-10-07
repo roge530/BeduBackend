@@ -1,24 +1,24 @@
-const mascota = require('../models/mascota');
+import { mascota } from '../models/mascota';
 
-function createMascota(req, res) {
+export const createMascota = (req, res) => {
     const body = req.body;
     mascota.create(body).then(mascota => {
         res.status(201).json(mascota);
     });
 }
 
-async function getMascota(req, res) {
+export const getMascota = async (req, res) => {
     const id = req.params.id;
     const result = await mascota.findByPk(id);
     res.status(200).json(result);
 }
 
-async function getMascotaByCliente(req, res) {
+export const getMascotaByCliente = async (req, res) => {
     const id = req.params.id;
     const result = await mascota.findAll({where: {clienteId: id} })
 }
 
-async function updateMascota(req, res) {
+export const updateMascota = async (req, res) => {
     const id = req.params.id;
     const mascotaUpdate = req.body;
     await mascota.update(mascotaUpdate, {where: {id}});
@@ -26,17 +26,10 @@ async function updateMascota(req, res) {
     res.status(200).json(updated);
 }
 
-async function deleteMascota(req, res) {
+export const deleteMascota = async (req, res) => {
     const id = req.params.id;
     const deleted = mascota.destroy(
         {where: {id} }
     );
     res.status(200).json(deleted);
-}
-
-module.exports = {
-    createMascota,
-    getMascota,
-    updateMascota,
-    deleteMascota
 }
