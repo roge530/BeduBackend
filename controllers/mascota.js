@@ -28,7 +28,9 @@ export const updateMascota = (req, res) => {
     const mascotaUpdate = req.body;
     mascota.update(mascotaUpdate, {where: {id}})
         .then(updated => {
-            res.status(200).json(updated);
+            mascota.findByPk(id).then(updated => {
+                res.status(200).json(updated)
+            })
         })
             .catch(err => {
                 res.status(400).json({

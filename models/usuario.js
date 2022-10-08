@@ -40,7 +40,11 @@ export const usuario = sequelize.define('usuario', {
     tipo_usuario: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 0
+        defaultValue: 0,
+        validate: {
+            min: 0,
+            max: 2
+        }
     }, //0 = asistente, 1 = veterinario, 2 = admin
     password_hash: {
         type: DataTypes.CHAR(64),

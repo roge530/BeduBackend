@@ -1,17 +1,13 @@
-// const usuario = require('../models/usuario');
 import {usuario } from '../models/usuario.js'
 
 export const createUsuario = (req, res) => {
     const body = req.body;
-    try {
-        usuario.create(body).then(usuario => {
-            res.status(201).json(usuario);
-        });
-    } catch(err) {
-        return res.status(400).json({
-            error: err.errors.map(e => e.message)
-        })
-    }
+    usuario.create(body).then(usuario => {
+        res.status(201).json(usuario);
+    })
+    .catch(err => {
+        return res.status(400).json({error: "Elemento(s) inválidos"})
+    })
 }
 
 export const getUsuarios = async (req, res) => {
@@ -20,12 +16,18 @@ export const getUsuarios = async (req, res) => {
     res.status(200).json(result);
 }
 
-export const updateUsuario = async (req, res) => {
+export const updateUsuario = (req, res) => {
     const id = req.params.id;
     const usuarioUpdate = req.body;
-    await mascota.update(usuarioUpdate, {where: {id}});
-    const updated = await usuario.findByPk(id);
-    res.status(200).json(updated);
+    usuario.update(usuarioUpdate, {where: {id}})
+        .then(updated => {
+            usuario.findByPk(id).then(updated => {
+                res.status(200).json(updated);
+            })
+        })
+        .catch(err => {
+            res.status(400).json({error: "Elemento(s) inválidos"})
+        })
 }
 
 export const deleteUsuario = async (req, res) => {
@@ -35,10 +37,3 @@ export const deleteUsuario = async (req, res) => {
     );
     res.status(200).json(deleted);
 }
-
-// module.exports = {
-//     createUsuario,
-//     getUsuarios,
-//     updateUsuario,
-//     deleteUsuario
-// }

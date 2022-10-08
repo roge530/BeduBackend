@@ -29,12 +29,21 @@ export const getCitasByMascota = async (req, res) => {
     res.status(200).json(result);
 }
 
-export const updateCita = async (req, res) => {
+export const updateCita = (req, res) => {
     const id = req.params.id;
     const citaUpdate = req.body;
-    await cita.update(citaUpdate, {where: {id}});
-    const updated = await cita.findByPk(id);
-    res.status(200).json(updated);
+    cita.update(citaUpdate, {where: {id}})
+        .then(actualizado => {
+            cita.findByPk(id)
+                .then(actualizado => {
+                    res.status(200).json(actualizado);
+                })
+        })
+        .catch(err => {
+            res.status(400).json({
+                error: "Elemento(s) inválidos"
+            })
+        })
 }
 
 export const deleteCita = async (req, res) => {

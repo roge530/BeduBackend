@@ -44,6 +44,10 @@ export const createCita_detalle = async (req, res) => {
                 return res.status(201).send(actualizado[0][0][0])
             })
         }
+    }).catch(err => {
+        return res.status(400).json({
+            error: "Elemento(s) inválidos"
+        })
     })
 }
 
