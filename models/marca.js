@@ -3,7 +3,7 @@ import { sequelize } from '../config/db.js'
 
 export const Marca=sequelize.define('marca',{
     nombre:{
-        type:DataTypes.CHAR(64),
+        type:DataTypes.STRING,
         allowNull:false,
         unique:true
     }

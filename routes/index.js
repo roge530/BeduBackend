@@ -1,22 +1,18 @@
-import {Router} from 'express'
-const routes = Router()
-import cliente from './cliente.js' 
+import {Router} from 'express';
+const router = Router();
+import cliente from './cliente.js';
+import usuario from './usuario.js';
+import mascota from './mascota.js';
+import especie from './especie.js';
+import subespecie from './subespecie.js';
+import cita from './cita.js';
+import cita_detalle from './cita_detalle.js';
+import marca from './marca.js'; 
+import servicio from './servicio.js';
 
-/*
-const usuario = require('./usuario');
-const mascota = require('./mascota');
-const especie = require('./especie');
-const subespecie = require('./subespecie');
-
-const cita = require('./cita');
-const cita_detalle = require('./cita_detalle');
-const marca=require('./marca'); 
-const servicio=require('./servicio');*/
-
-routes.get('/', (req, res) => {
+router.get('/', (req, res) => {
     res.json({'info': 'Welcome to VET API!'})
 });
-/*
 router.use('/mascota', mascota);
 router.use('/usuario', usuario);
 router.use('/especie', especie);
@@ -26,6 +22,5 @@ router.use('/cita', cita);
 router.use('/cita_detalle', cita_detalle);
 router.use('/marca',marca);
 router.use('/servicio',servicio);
-*/
 
-export {routes}
+export {router}

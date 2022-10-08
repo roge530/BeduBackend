@@ -1,7 +1,7 @@
 // const usuario = require('../models/usuario');
-import {usuario } from '../models/usuario'
+import {usuario } from '../models/usuario.js'
 
-function createUsuario(req, res) {
+export const createUsuario = (req, res) => {
     const body = req.body;
     try {
         usuario.create(body).then(usuario => {
@@ -14,13 +14,13 @@ function createUsuario(req, res) {
     }
 }
 
-async function getUsuarios(req, res) {
+export const getUsuarios = async (req, res) => {
     const id = req.params.id;
     const result = await usuario.findAll();
     res.status(200).json(result);
 }
 
-async function updateUsuario(req, res) {
+export const updateUsuario = async (req, res) => {
     const id = req.params.id;
     const usuarioUpdate = req.body;
     await mascota.update(usuarioUpdate, {where: {id}});
@@ -28,7 +28,7 @@ async function updateUsuario(req, res) {
     res.status(200).json(updated);
 }
 
-async function deleteUsuario(req, res) {
+export const deleteUsuario = async (req, res) => {
     const id = req.params.id;
     const deleted = usuario.destroy(
         {where: {id} }

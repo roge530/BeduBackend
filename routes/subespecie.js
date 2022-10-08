@@ -1,12 +1,13 @@
-const router = require('express').Router();
-const {
+import {Router} from 'express';
+const router = Router();
+import {
     createSubespecie,
     getSubespecie,
     getSubespecies,
     updateSubespecie,
     deleteSubespecie,
     getSubespecieByEspecie
-} = require('../controllers/subespecie');
+} from '../controllers/subespecie.js';
 
 router.get('/', getSubespecies);
 router.get('/:id', getSubespecie);
@@ -15,4 +16,4 @@ router.post('/', createSubespecie);
 router.patch('/:id', updateSubespecie);
 router.delete('/:id', deleteSubespecie);
 
-module.exports = router;
+export default router;

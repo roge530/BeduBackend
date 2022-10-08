@@ -1,69 +1,8 @@
-// const { Op } = require('sequelize')
-// const cita_detalle = require('../models/cita_detalle');
-// const cita = require('../models/cita');
-
-import { Op } from 'sequelize' 
-import { cita_detalle } from '../models/cita_detalle'
-import { cita } from '../models/cita' 
+import { Op } from 'sequelize';
+import {cita_detalle} from '../models/cita_detalle.js';
 
 
-// function createCita_detalle(req, res) {
-//     const body = req.body;
-//     cita_detalle.create(body).then(cita_detalle => {
-//         res.status(201).json(cita_detalle);
-//     })
-//     .catch((err) => {
-//         if('SequelizeUniqueConstraintError'){
-//             cita_detalle.increment(
-//                 {cantidad: +1},
-//                 {where: 
-//                     {[Op.and]: [
-//                         {citaId: req.body['citaId']},
-//                         {servicioId: req.body['servicioId']}
-//                     ]}
-//                 }
-//             ).then(cita_detalle => {
-//                 res.status(201).json(cita_detalle.entries)
-//             })
-//         }
-//         if('SequelizeValidationError'){
-//             return res.status(400).json({
-//                 error: err.errors.map(e => e.message)
-//             })
-//         }
-//     });
-// }
-
-// async function createCita_detalle(req, res) {
-//     const body = req.body;
-//     const citaId = req.body['citaId'];
-//     const servicioId = req.body['servicioId'];
-//     const existe = await 
-//     cita_detalle.findOne(
-//         {where: 
-//             {[Op.and]: [
-//                 {citaId: req.body['citaId']},
-//                 {servicioId: req.body['servicioId']}
-//                 ]}
-//     });
-//     if(!existe) {
-//         const created = await cita_detalle.create(body);
-//         return res.status(201).json(created);
-//     }
-//     const updated = await 
-//     cita_detalle.increment(
-//         {cantidad: +1},
-//         {where: 
-//             {[Op.and]: [
-//                 {citaId: citaId},
-//                 {servicioId: servicioId}
-//             ]}
-//         }
-//     )
-//     return res.status(201).json(updated.entries)
-// }
-
-function createCita_detalle(req, res) {
+export const createCita_detalle = async (req, res) => {
     const body = req.body;
     const citaId = req.body['citaId'];
     const servicioId = req.body['servicioId'];
@@ -77,7 +16,7 @@ function createCita_detalle(req, res) {
         if(!founded) {
             cita_detalle.create(body)
                 .then(creado => {
-                    return res.status(201).json(creado);
+                    return res.status(201).send(creado);
                 })
                     .catch (err => {
                         if(["SequelizeValidationError", "SequelizeUniqueConstraintError", "SequelizeForeignKeyConstraintError"].includes(err.name)){
@@ -87,7 +26,7 @@ function createCita_detalle(req, res) {
                         }
                         else {
                             throw err;
-                            return
+                            
                         }
                     })
         }
@@ -101,19 +40,19 @@ function createCita_detalle(req, res) {
                     ]}
                 }
             ).then(actualizado => {
-                return res.status(201).json(actualizado)
+                return res.status(201).send(actualizado[0][0][0])
             })
         }
     })
 }
 
-async function getCita_detalle(req, res) {
+export const getCita_detalle = async (req, res) => {
     const id = req.params.id;
     const result = await cita_detalle.findAll({where: {citaId: id} });
     res.status(200).json(result);
 }
 
-async function updateCita_detalle(req, res) {
+export const updateCita_detalle = async (req, res) => {
     const citaId = req.params.citaId;
     const servicioId = req.params.servicioId;
     const cita_detalleUpdate = req.body;
@@ -142,7 +81,7 @@ async function updateCita_detalle(req, res) {
     }
 }
 
-async function deleteCita_detalle(req, res) {
+export const deleteCita_detalle = async (req, res) => {
     const citaId = req.params.citaId;
     const servicioId = req.params.servicioId;
     let existe = { cantidad }
@@ -180,10 +119,3 @@ async function deleteCita_detalle(req, res) {
     //     res.status(200).json(updated)
     // }
 }
-
-// module.exports = {
-//     createCita_detalle,
-//     getCita_detalle,
-//     updateCita_detalle,
-//     deleteCita_detalle
-// }
