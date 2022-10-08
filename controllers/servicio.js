@@ -1,4 +1,5 @@
-const Servicio=require ('../models/servicio')
+// const Servicio=require ('../models/servicio')
+import {Servicio} from '../models/servicio'
 
 //Create
 function createService (req,res){
@@ -33,9 +34,9 @@ async function deleteService(req,res){
     res.status(200).json(deleted);
 }
 
-module.exports={
-    createService,
-    getServices,
-    updateService,
-    deleteService
-}
+// module.exports={
+//     createService,
+//     getServices,
+//     updateService,
+//     deleteService
+// }

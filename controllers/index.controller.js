@@ -1,5 +1,7 @@
-const {Pool} = require('pg')
-const bcrypt = require('bcryptjs')
+// const {Pool} = require('pg')
+// const bcrypt = require('bcryptjs')
+import {Pool} from 'pg'
+import {bcrypt} from 'bcryptjs'
 
 const pool = new Pool ({
     host: 'localhost',

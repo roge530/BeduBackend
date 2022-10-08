@@ -1,4 +1,5 @@
-const usuario = require('../models/usuario');
+// const usuario = require('../models/usuario');
+import {usuario } from '../models/usuario'
 
 function createUsuario(req, res) {
     const body = req.body;
@@ -35,9 +36,9 @@ async function deleteUsuario(req, res) {
     res.status(200).json(deleted);
 }
 
-module.exports = {
-    createUsuario,
-    getUsuarios,
-    updateUsuario,
-    deleteUsuario
-}
+// module.exports = {
+//     createUsuario,
+//     getUsuarios,
+//     updateUsuario,
+//     deleteUsuario
+// }

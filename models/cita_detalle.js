@@ -1,7 +1,7 @@
-import { DataTypes } from 'sequelize'
-import { sequelize } from '../config/db.js'
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../config/db')
 
-export const cita_detalle = sequelize.define('cita_detalle',{
+const cita_detalle = sequelize.define('cita_detalle',{
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
