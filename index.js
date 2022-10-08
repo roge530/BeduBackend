@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import * as dotenv from 'dotenv-safe'
 dotenv.config()
 const app = express()
-const PORT = process.env.EXPRESS_PORT || 3000
+const PORT = process.env.PORT || 3000
 import { sequelize } from './config/db.js'
 import { router } from './routes/index.js'
 import {swaggerOptions} from './config/swagger.js'

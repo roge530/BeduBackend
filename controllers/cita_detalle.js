@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+import { cita } from '../models/cita.js';
 import {cita_detalle} from '../models/cita_detalle.js';
 
 
@@ -43,6 +44,10 @@ export const createCita_detalle = async (req, res) => {
                 return res.status(201).send(actualizado[0][0][0])
             })
         }
+    }).catch(err => {
+        return res.status(400).json({
+            error: "Elemento(s) inválidos"
+        })
     })
 }
 
@@ -52,40 +57,38 @@ export const getCita_detalle = async (req, res) => {
     res.status(200).json(result);
 }
 
-export const updateCita_detalle = async (req, res) => {
+export const updateCita_detalle = (req, res) => {
     const citaId = req.params.citaId;
     const servicioId = req.params.servicioId;
     const cita_detalleUpdate = req.body;
-    try {
-        await cita_detalle.update(cita_detalleUpdate, {
+    cita_detalle.update(cita_detalleUpdate, {
             where: {
-                [Op.and]: [
-                    {citaId: citaId},
-                    {servicioId: servicioId}
-                ]
-                }});
-        const updated = await cita_detalle.findAll({
-            where: {
-                [Op.and]: [
-                    {citaId: citaId},
-                    {servicioId: servicioId}
-                ]
-                }});
-        res.status(200).json(updated);
-    } catch (err) {
-        if('SequelizeValidationError'){
-            return res.status(400).json({
-                error: err.errors.map(e => e.message)
+            [Op.and]: [
+                {citaId: citaId},
+                {servicioId: servicioId}
+            ]
+            }}).then(updated => {
+                cita_detalle.findAll({
+                    where: {
+                        [Op.and]: [
+                            {citaId: citaId},
+                            {servicioId: servicioId}
+                        ]
+                    }
+                }).then(updated => res.status(200).json(updated))
             })
-        }
-    }
+        .catch (err => {
+            return res.status(400).json({
+                error: "Elemento(s) inválidos"
+            })
+        }) 
+    
 }
 
 export const deleteCita_detalle = async (req, res) => {
     const citaId = req.params.citaId;
     const servicioId = req.params.servicioId;
-    let existe = { cantidad }
-    existe = await cita_detalle.findAll(
+    cita_detalle.findOne(
         {where: {
             [Op.and]: [
                 {citaId: citaId},
@@ -93,29 +96,38 @@ export const deleteCita_detalle = async (req, res) => {
             ]
             },
         raw: true}
-    )
-    // console.log(existe[0]);
-    console.log(existe[0]['cantidad']);
-    // if((!!existe) && existe[0]['cantidad'] <= 1){
-    //     const deletedCita_detalle = await cita_detalle.destroy( 
-    //         {where: {
-    //             [Op.and]: [
-    //                 {citaId: citaId},
-    //                 {servicioId: servicioId}
-    //             ]
-    //             }});
-        
-    //     res.status(200).json(deletedCita_detalle);
-    // } else {
-    //     const updated = await cita_detalle.decrement(
-    //         {cantidad: 1},
-    //         {where: 
-    //             {[Op.and]: [
-    //                 {citaId: citaId},
-    //                 {servicioId: servicioId}
-    //             ]}
-    //         }
-    //     )
-    //     res.status(200).json(updated)
-    // }
+    ).then(result => {
+        if(!!result){
+            if(result['cantidad'] > 1){
+                console.log(result)
+                cita_detalle.decrement(
+                    {cantidad: +1},
+                    {where: 
+                        {[Op.and]: [
+                            {citaId: citaId},
+                            {servicioId: servicioId}
+                        ]}
+                    }).then(actualizado => {
+                        return res.status(201).send(actualizado[0][0][0])
+                    }
+                    )
+            }
+            else {
+                cita_detalle.destroy( 
+                    {where: {
+                        [Op.and]: [
+                            {citaId: citaId},
+                            {servicioId: servicioId}
+                        ]
+                        }}).then(destroyed => {
+                            return res.status(200).json(destroyed)
+                        })
+            }
+        }
+        else{
+            return res.status(400).json({
+                error: "Elemento(s) inválidos"
+            })
+        }
+    })
 }

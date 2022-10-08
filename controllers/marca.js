@@ -1,10 +1,14 @@
 import {Marca} from '../models/marca.js'
 
 //Create
-export const createMarca = async (req, res) => {
+export const createMarca =  (req, res) => {
     const body=req.body;
     Marca.create(body).then(marca=>{
         res.status(201).send(marca);
+    }).catch(err => {
+        res.status(400).json({
+            error: "Elemento(s) inválidos"
+        })
     })
 }
 
@@ -16,12 +20,20 @@ export const getMarca = async (req, res) => {
 }
 
 //Edit
-export const updateMarca = async (req, res) => {
+export const updateMarca = (req, res) => {
     const id=req.params.id;
     const marca=req.body;
-    await Marca.update(marca, {where:{id}})
-    const marcaUpdated=await Marca.findByPk(id);
-    res.status(200).json(marcaUpdated)
+    Marca.update(marca, {where:{id}})
+        .then(actualizado => {
+            Marca.findByPk(id).then(resultado => {
+                res.status(200).json(resultado)
+            })
+        })
+            .catch(err => {
+                res.status(400).json({
+                    error: "Elemento(s) inválidos"
+                })
+            })
 }
 
 //Delete

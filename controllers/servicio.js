@@ -6,6 +6,10 @@ export const createService = (req, res) => {
     const body=req.body;
     Servicio.create(body).then(servicio=>{
         res.status(201).send(servicio);
+    }).catch(err => {
+        res.status(400).json({
+            error: "Elemento(s) inválidos"
+        })
     })
 }
 
@@ -17,12 +21,21 @@ export const getServices = async (req, res) => {
 }
 
 //Edit
-export const updateService = async (req, res) => {
+export const updateService = (req, res) => {
     const id=req.params.id;
     const servicio=req.body;
-    await Servicio.update(servicio, {where:{id}})
-    const servicioUpdated=await Servicio.findByPk(id);
-    res.status(200).json(servicioUpdated)
+    Servicio.update(servicio, {where:{id}})
+        .then(actualizado => {
+            Servicio.findByPk(id)
+                .then(servicioUpdated => {
+                    res.status(200).json(servicioUpdated)
+                })
+        })
+            .catch(err => {
+                res.status(400).json({
+                    error: "Elemento(s) inválidos"
+                })
+            })
 }
 
 //Delete
