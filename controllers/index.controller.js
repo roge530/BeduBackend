@@ -33,9 +33,9 @@ const createAdmin = async (request, response) => {
     response.status(200).json({info: `${email} as admin`})
 }
 
-module.exports = {
-    getHome,
-    getAdministrators,
-    createAdmin,
-    getAdminByEmail
-}
+// module.exports = {
+//     getHome,
+//     getAdministrators,
+//     createAdmin,
+//     getAdminByEmail
+// }
