@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/db.js'
-import { cita } from './cita.js'
+import { cita } from './cita.js';
 
 export const usuario = sequelize.define('usuario', {
     id: {
@@ -53,4 +53,4 @@ export const usuario = sequelize.define('usuario', {
 });
 
 usuario.hasMany(cita);
-cita.hasOne(usuario);
+cita.belongsTo(usuario);
