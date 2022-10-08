@@ -57,33 +57,32 @@ export const getCita_detalle = async (req, res) => {
     res.status(200).json(result);
 }
 
-export const updateCita_detalle = async (req, res) => {
+export const updateCita_detalle = (req, res) => {
     const citaId = req.params.citaId;
     const servicioId = req.params.servicioId;
     const cita_detalleUpdate = req.body;
-    try {
-        await cita_detalle.update(cita_detalleUpdate, {
+    cita_detalle.update(cita_detalleUpdate, {
             where: {
-                [Op.and]: [
-                    {citaId: citaId},
-                    {servicioId: servicioId}
-                ]
-                }});
-        const updated = await cita_detalle.findAll({
-            where: {
-                [Op.and]: [
-                    {citaId: citaId},
-                    {servicioId: servicioId}
-                ]
-                }});
-        res.status(200).json(updated);
-    } catch (err) {
-        if('SequelizeValidationError'){
-            return res.status(400).json({
-                error: err.errors.map(e => e.message)
+            [Op.and]: [
+                {citaId: citaId},
+                {servicioId: servicioId}
+            ]
+            }}).then(updated => {
+                cita_detalle.findAll({
+                    where: {
+                        [Op.and]: [
+                            {citaId: citaId},
+                            {servicioId: servicioId}
+                        ]
+                    }
+                }).then(updated => res.status(200).json(updated))
             })
-        }
-    }
+        .catch (err => {
+            return res.status(400).json({
+                error: "Elemento(s) inválidos"
+            })
+        }) 
+    
 }
 
 export const deleteCita_detalle = async (req, res) => {
