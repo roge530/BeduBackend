@@ -1,32 +1,45 @@
-import {Cliente} from '../models/cliente.js'
+import bcrypt from 'bcryptjs';
+import {Cliente} from '../models/cliente.js';
 
-export const signUp = async (req, res) => {
+export const signUp = (req, res) => {
     const body = req.body;
-    try { 
-        const cliente = await Cliente.create(body)
-        cliente.password_salt='1';
-        cliente.password_hash='2';
-        await cliente.save();
-        res.status(201).json(cliente);
-    } catch (err) {
-        if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
-            return res.status(400).json({
-                error: err.errors.map(e => e.message),
-                test: "no c q pasa"
+    bcrypt.hash(body['password'], 8)
+        .then( hashed => {
+            body['password_hash'] = hashed;
+            Cliente.create(body).then(cliente => {
+                cliente['password_hash'] = 'hashed'
+                res.status(201).json(cliente);
+            }) .catch(err => {
+                return res.status(400).json({error: "Elemento(s) inválidos"})
             })
-        } else {
-            throw err;
-    
-        }
-    }
+        }) .catch(err => {
+            return res.status(400).json({error: "Elemento(s) inválidos"})
+        })
 }
 
-export const logIn = async (req, res) => {
-    
-    const body =req.body;
-    const cliente = await Cliente.findOne({where:{ email: body['email']}});
-    if (!cliente){
-        return res.status(404).json({error: "Cliente no encontrado"});
+export const logIn = (req, res) => {
+    const body = req.body;
+    if(body['email'] && body['password']){
+        Cliente.findOne({where: {email: body['email']}})
+            .then(resultado => {
+                if(!resultado) {
+                    return res.status(404).json({error: "Cliente no encontrado"})
+                }
+                bcrypt.compare(body['password'], resultado['password_hash'], function(err, res1) {
+                    if(err){
+                        return res.status(400).json({error: "Email o contraseña incorrecta"})
+                    }
+                    if(res1){
+                        return res.status(200).json({email: resultado['email'], login: "OK, here's your token :)"})
+                    } else {
+                        return res.status(400).json({error: "Email o contraseña incorrecta"})
+                    }
+                })
+            }).catch(err => {
+                return res.status(400).json({error: "Email o contraseña incorrecta"})
+            })
 
+    } else {
+        return res.status(400).json({error: "Email o contraseña incorrecta"})
     }
 }

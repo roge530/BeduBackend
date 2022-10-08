@@ -4,12 +4,14 @@ import {
     createUsuario,
     getUsuarios,
     updateUsuario,
-    deleteUsuario
+    deleteUsuario,
+    logIn
 } from '../controllers/usuario.js'
 
 router.get('/', getUsuarios);
-router.post('/', createUsuario);
+router.post('/signUp', createUsuario);
 router.patch('/:id', updateUsuario);
 router.delete('/:id', deleteUsuario);
+router.post('/logIn', logIn);
 
 export default router

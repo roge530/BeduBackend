@@ -47,11 +47,7 @@ export const usuario = sequelize.define('usuario', {
         }
     }, //0 = asistente, 1 = veterinario, 2 = admin
     password_hash: {
-        type: DataTypes.CHAR(64),
-        allowNull: true
-    },
-    password_salt: {
-        type: DataTypes.CHAR(64),
+        type: DataTypes.TEXT,
         allowNull: true
     }
 });
