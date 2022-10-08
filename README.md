@@ -11,7 +11,7 @@
 ## Merge o Pull request?
 **PULL REQUEST a test** esto para evitar subir codigo experimental a Master
 
-## Hice Pull request a Master, que puedo hacer?
+## Hice Pull request a Main, que puedo hacer?
 Se revisa la solicitud y se aprueba segun sea el caso
 
 ## Se implementara CI/CD?
@@ -42,7 +42,8 @@ Trabajaremos como microservicios[^3] para evitar los conflictos de codigo, gener
 Puedes consultar directamente Trello ya que ahi mismo te redirige al issue que trabajes
 
 ## Como esta constituida la base de datos?
-El prototipo es el siguiente
+El prototipo es el siguiente:
+![Diagrama](/diagrams/ERDDiagram1.png)
 
 [^1]: Para clonar con SSH debes ya tener configurada tu clave publica SSH de tu equipo y esta debe estar en tu cuenta https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/github-clone-with-ssh-keys
 
