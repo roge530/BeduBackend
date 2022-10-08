@@ -5,7 +5,7 @@ import {
     getMascota,
     updateMascota,
     deleteMascota
-} from '../controllers/mascota'
+} from '../controllers/mascota.js'
 
 router.get('/:id', getMascota);
 router.post('/', createMascota);

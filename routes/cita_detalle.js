@@ -5,7 +5,7 @@ import {
     getCita_detalle,
     updateCita_detalle,
     deleteCita_detalle
-} from'../controllers/cita_detalle';
+} from'../controllers/cita_detalle.js';
 
 router.get('/:id', getCita_detalle);
 router.post('/', createCita_detalle);

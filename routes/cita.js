@@ -7,7 +7,7 @@ import {
     deleteCita,
     getCitasByCliente,
     getCitasByMascota
-} from '../controllers/cita'
+} from '../controllers/cita.js'
 
 router.get('/:id', getCita);
 router.get('/c/:id',getCitasByCliente);

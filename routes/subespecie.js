@@ -1,13 +1,13 @@
 import {Router} from 'express';
 const router = Router();
-const {
+import {
     createSubespecie,
     getSubespecie,
     getSubespecies,
     updateSubespecie,
     deleteSubespecie,
     getSubespecieByEspecie
-} = require('../controllers/subespecie');
+} from '../controllers/subespecie.js';
 
 router.get('/', getSubespecies);
 router.get('/:id', getSubespecie);

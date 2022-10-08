@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/db.js'
-import {Cita_detalle} from './cita_detalle'
-import {Cita} from './cita'
+import {cita_detalle} from './cita_detalle.js'
+import {cita} from './cita.js'
 
 
 export const Servicio=sequelize.define('servicio',{
@@ -16,4 +16,4 @@ export const Servicio=sequelize.define('servicio',{
 
 })
 
-Cita.belongsToMany(Servicio,{through:Cita_detalle, foreignKey: 'citaId'});
+cita.belongsToMany(Servicio,{through:cita_detalle, foreignKey: 'citaId'});

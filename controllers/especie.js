@@ -1,4 +1,4 @@
-import {especie} from '../models/especie';
+import {especie} from '../models/especie.js';
 
 export const createEspecie = async (req, res) => {
     const body = req.body;

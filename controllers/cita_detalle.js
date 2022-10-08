@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import {cita_detalle} from '../models/cita_detalle';
+import {cita_detalle} from '../models/cita_detalle.js';
 
 
 export const createCita_detalle = async (req, res) => {

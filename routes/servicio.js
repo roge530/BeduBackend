@@ -5,7 +5,7 @@ import {
     getServices,
     updateService,
     deleteService
-} from '../controllers/servicio'
+} from '../controllers/servicio.js'
 
 router.get('/', getServices);
 router.post('/',createService);

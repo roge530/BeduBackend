@@ -5,11 +5,11 @@ import {
     getUsuarios,
     updateUsuario,
     deleteUsuario
-} from '../controllers/usuario'
+} from '../controllers/usuario.js'
 
 router.get('/', getUsuarios);
 router.post('/', createUsuario);
 router.patch('/:id', updateUsuario);
 router.delete('/:id', deleteUsuario);
 
-module.exports = router;
+export default router

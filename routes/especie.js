@@ -6,7 +6,7 @@ import {
     getEspecies,
     updateEspecie,
     deleteEspecie
-} from '../controllers/especie';
+} from '../controllers/especie.js';
 
 router.get('/', getEspecies);
 router.get('/:id', getEspecie);

@@ -5,7 +5,7 @@ dotenv.config()
 const app = express()
 const PORT = process.env.EXPRESS_PORT || 3000
 import { sequelize } from './config/db.js'
-import { routes } from './routes/index.js'
+import { router } from './routes/index.js'
 
 // middlewares
 app.use(bodyParser.json())
@@ -16,7 +16,7 @@ app.use(
 )
 
 // routes
-app.use('/', routes);
+app.use('/', router);
 
 async function main() {
     try {

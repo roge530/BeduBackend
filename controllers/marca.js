@@ -1,4 +1,4 @@
-import {Marca} from '../models/marca'
+import {Marca} from '../models/marca.js'
 
 //Create
 export const createMarca = async (req, res) => {

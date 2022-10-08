@@ -1,4 +1,4 @@
-import {cita} from '../models/cita';
+import {cita} from '../models/cita.js';
 
 export const createCita = async (req, res) => {
     const body = req.body;

@@ -5,7 +5,7 @@ import {
     getMarca,
     updateMarca,
     deleteMarca
-} from '../controllers/marca'
+} from '../controllers/marca.js'
 
 router.get('/', getMarca);
 router.post('/',createMarca);

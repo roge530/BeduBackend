@@ -1,4 +1,4 @@
-import { mascota } from '../models/mascota';
+import { mascota } from '../models/mascota.js';
 
 export const createMascota = (req, res) => {
     const body = req.body;

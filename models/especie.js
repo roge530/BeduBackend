@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/db.js'
-import {subespecie} from './subespecie'
+import {subespecie} from './subespecie.js'
 
 export const especie = sequelize.define('especie',{
     id: {
