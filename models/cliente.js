@@ -32,7 +32,8 @@ export const Cliente= sequelize.define('cliente',{
     },
 
     email:{
-        type:DataTypes.STRING(100),
+        type:DataTypes.TEXT,
+        allowNull: false,
         validate:{
             isEmail:true
         }
