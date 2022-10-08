@@ -1,6 +1,8 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/db.js'
 import {cita} from './cita.js'
+import {especie} from './especie.js'
+import { subespecie } from './subespecie.js'
 
 export const mascota = sequelize.define('mascota',{
     id: {
@@ -12,13 +14,13 @@ export const mascota = sequelize.define('mascota',{
         type: DataTypes.STRING,
         allowNull: false
     },
-    especieId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    subespecieId: {
-        type: DataTypes.INTEGER
-    },
+    // especieId: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false
+    // },
+    // subespecieId: {
+    //     type: DataTypes.INTEGER
+    // },
     tamanio: {
         type: DataTypes.STRING
     },
@@ -28,3 +30,10 @@ export const mascota = sequelize.define('mascota',{
 })
 
 mascota.hasMany(cita, {foreignKey: 'mascotaId'});
+mascota.hasOne(especie, {foreignKey: 'especieId'});
+
+mascota.hasOne(subespecie, {foreignKey: 'subespecieId'});
+
+especie.belongsTo(mascota)
+
+
