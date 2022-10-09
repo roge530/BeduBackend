@@ -1,6 +1,6 @@
 --Creacion de usuarios
 --Todos los registros en la tabla usuarios llevan como password: usuario
-insert into usuarios (nombre, apellido_paterno, apellido_materno, usuario, email, tipo_usuario, "createdAt", "updatedAt", password_hash) 
+insert into usuarios (nombre, apellido_paterno, apellido_materno, usuario, email, tipo_usuario, "createdAt", "updatedAt", password) 
 values 
  ('admin', 'admin', 'admin', 'admin', 'admin@mail.com', 2, '01/01/2022', '01/01/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
  ('vet', 'vet', 'vet', 'vet', 'vet@mail.com', 1, '01/01/2022', '01/01/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
@@ -18,7 +18,7 @@ values
 
  --Creacion de clientes
  --Todos los registros en la tabla clientes llevan como password: cliente
- insert into clientes (nombre, apellido_paterno, apellido_materno, email, "createdAt", "updatedAt", password_hash) 
+ insert into clientes (nombre, apellido_paterno, apellido_materno, email, "createdAt", "updatedAt", password) 
 values
 ('usuario', 'usuario', 'usuario', 'usuario@example.com', '01/01/2020', '01/01/2022', '$2y$08$k1jwZsZNt91w6c86s6YE1uwthDVw1JOy.QOeGAzXYVrzjuiGETTv.'),
 ('Lea', 'Toombs', 'Rapport', 'lrapport0@berkeley.edu', '09/12/2022', '09/09/2021', '$2y$08$k1jwZsZNt91w6c86s6YE1uwthDVw1JOy.QOeGAzXYVrzjuiGETTv.'),

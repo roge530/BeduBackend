@@ -67,7 +67,8 @@ router.get('/:id', assistVetAut, getMascota);
  *      schema:
  *        type: integer
  *      required: true
- *    description: Despliega las mascotas del cliente logeado/ assistente Vet
+ *    description: Despliega las mascotas del cliente logeado assistente Vet
+ *    response:  
  *      '200':
  *        description: Respuesta exitosa
  *     
@@ -79,7 +80,8 @@ router.get('/c/:id', assistVetAut, getMascotaByCliente);
  *  get:
  *    tags: [Mascota]  
  *    summary: Obtiene las mascotas asociadas al cliente
- *    description: Despliega las mascotas del cliente logeado/ cliente 
+ *    description: Despliega las mascotas del cliente logeado cliente 
+ *    response: 
  *      '200':
  *        description: Respuesta exitosa
  *     

@@ -47,7 +47,7 @@ export const Cliente= sequelize.define('cliente',{
 
     },
 
-    password_hash: {
+    password: {
         type: DataTypes.TEXT,
         allowNull: true
     }
