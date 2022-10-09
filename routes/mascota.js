@@ -55,7 +55,35 @@ import { customerAuth} from '../middlewares/customerAuth.js'
  *     
  */
 router.get('/:id', assistVetAut, getMascota);
+/** 
+ *@swagger
+ * /mascota/c/{id}:
+ *  get:
+ *    tags: [Mascota]  
+ *    summary: Obtiene las mascotas asociadas al cliente
+ *    parameters:
+ *    - in: path
+ *      name: id
+ *      schema:
+ *        type: integer
+ *      required: true
+ *    description: Despliega las mascotas del cliente logeado/ assistente Vet
+ *      '200':
+ *        description: Respuesta exitosa
+ *     
+ */
 router.get('/c/:id', assistVetAut, getMascotaByCliente);
+/** 
+ *@swagger
+ * /mascota/clientes:
+ *  get:
+ *    tags: [Mascota]  
+ *    summary: Obtiene las mascotas asociadas al cliente
+ *    description: Despliega las mascotas del cliente logeado/ cliente 
+ *      '200':
+ *        description: Respuesta exitosa
+ *     
+ */
 router.post('/clientes', customerAuth, getMascotaByCliente);
 /**
 *@swagger

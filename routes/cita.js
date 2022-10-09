@@ -60,6 +60,17 @@ router.get('/:id', assistVetAut, getCita);
  *        description: Respuesta exitosa
  */
 router.get('/c/:id', assistVetAut, getCitasByCliente);
+/** 
+ *@swagger
+ * /cita/clientes/citas:
+ *  post:
+ *    tags: [Cita]
+ *    summary: Obtiene cita por medio del clienteId
+ *    description: Despliega la cita del cliente seleccionado
+ *    responses:
+ *      '201':
+ *        description: Respuesta exitosa
+ */
 router.post('/clientes/citas', customerAuth, getCitasByCliente);
 /** 
  *@swagger
