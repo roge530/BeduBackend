@@ -28,10 +28,13 @@ import { adminAuth } from '../middlewares/usersAuth.js';
 *         required: true              
 *       apellido_paterno:
 *         type: string
+*         required: true           
 *       apellido_materno:
 *         type: string
+*         required: true       
 *       usuario:
 *         type: string
+*         required: true 
 *       email:
 *         type: string
 *       celular:
@@ -40,19 +43,20 @@ import { adminAuth } from '../middlewares/usersAuth.js';
 *         type: string
 *       tipo_usuario:
 *          type: integer
+*          required: true  
 *       password:  
 *          type: string
+*          required: true  
 * parameters:
-*       UserLogIn:
-*          required:
-*            - usuario
-*            - password
-*          properties:
-*           usuario:
-*               type: string
-*               required: true
-*           password:  
-*               type: string        
+*   UsuarioLogIn:
+*    required:
+*       - usuario
+*       - password
+*    properties:
+*       usuario:
+*         type: string                     
+*       password:
+*         type: string     
 */
 
 /** 
@@ -60,6 +64,8 @@ import { adminAuth } from '../middlewares/usersAuth.js';
  *
  * /usuario/:
  *  get:
+ *    security:            
+*      - bearerAuth: []    
  *    tags: [Usuario]  
  *    summary: Obtiene todos los usuarios registradas
  *    description: Despliega todas los usuarios registrados
@@ -73,9 +79,10 @@ router.get('/', adminAuth, getUsuarios);
 *@swagger
 * /usuario/signUp:
 *  post:
+*    
 *     tags: [Usuario] 
 *     summary: Crea una nuevo usuario
-*     description: Crea el registro del usuario a partir del JSON correspondiente 
+*     description: Crea el registro del usuario a partir del JSON correspondiente. Tipo_usuario 0 = asistente, 1 = veterinario, 2 = admin
 *       - application/json
 *     parameters:   
 *       - name: Datos del usuario
@@ -133,6 +140,8 @@ router.patch('/:id', adminAuth, updateUsuario);
  *        description: Respuesta exitosa
  */
 router.delete('/:id', adminAuth, deleteUsuario);
+
+
 /**
 *@swagger
 * /usuario/logIn:
@@ -147,7 +156,7 @@ router.delete('/:id', adminAuth, deleteUsuario);
 *         in: body         
 *         schema:
 *            type: object
-*            $ref: '#/parameters/UserLogIn'   
+*            $ref: '#/parameters/UsuarioLogIn'   
 *     responses:
 *         200:
 *           description: Usuario dada de alta exitosamente       
