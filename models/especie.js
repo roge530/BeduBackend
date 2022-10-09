@@ -14,5 +14,5 @@ export const especie = sequelize.define('especie',{
 })
 
 //Añadimos la relación 1 a muchos
-especie.hasMany(subespecie);
-subespecie.belongsTo(especie);
+
+subespecie.belongsTo(especie, {foreignkey:'mascotaId'});

@@ -8,6 +8,7 @@ export const subespecie = sequelize.define('subespecie',{
         primaryKey: true
     },
     subespecie: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        
     }
 })
