@@ -1,5 +1,12 @@
 # BeduBackend
 
+## Donde esta la documentación?
+[Aqui](https://veterinaria-api-bedu-2022.herokuapp.com/docs/#/)
+
+## Que credenciales puedo usar para jugar con el API?
+usuario: admin
+contra: usuario
+
 ## Como trabajar las ramas?
 1. Tienes que ser invitado a trabajar al repositorio
 2. Clonas el repositorio, te recomiendo que lo hagas a traves de SSH[^1].
