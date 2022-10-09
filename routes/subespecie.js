@@ -8,12 +8,13 @@ import {
     deleteSubespecie,
     getSubespecieByEspecie
 } from '../controllers/subespecie.js';
+import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
-router.get('/', getSubespecies);
+router.get('/', assistVetAut, getSubespecies);
 router.get('/:id', getSubespecie);
-router.get('/e/:id', getSubespecieByEspecie);
-router.post('/', createSubespecie);
-router.patch('/:id', updateSubespecie);
-router.delete('/:id', deleteSubespecie);
+router.get('/e/:id', assistVetAut, getSubespecieByEspecie);
+router.post('/', vetAuth, createSubespecie);
+router.patch('/:id', vetAuth, updateSubespecie);
+router.delete('/:id', vetAuth, deleteSubespecie);
 
 export default router;

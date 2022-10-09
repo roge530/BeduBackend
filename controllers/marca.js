@@ -13,7 +13,7 @@ export const createMarca =  (req, res) => {
 }
 
 //Get
-export const getMarca = async (req, res) => {
+export const getMarcas = async (req, res) => {
     const marcas= await Marca.findAll();
     res.status(200).json(marcas);
 

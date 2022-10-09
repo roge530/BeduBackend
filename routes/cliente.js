@@ -2,12 +2,12 @@ import {Router} from 'express'
 const router = Router()
 import {
     signUp,
-    logIn,
-    seeInfo
+    logIn
+    // seeInfo
 } from '../controllers/cliente.js'
-import { requireToken } from '../middlewares/requireToken.js';
+import { vetAuth } from '../middlewares/usersAuth.js';
 
 router.post('/signUp', signUp);
 router.post('/logIn', logIn);
-router.get('/', requireToken, seeInfo)
+// router.get('/', requireToken, seeInfo)
 export default router

@@ -7,11 +7,12 @@ import {
     updateEspecie,
     deleteEspecie
 } from '../controllers/especie.js';
+import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
-router.get('/', getEspecies);
+router.get('/', assistVetAut, getEspecies);
 router.get('/:id', getEspecie);
-router.post('/', createEspecie);
-router.patch('/:id', updateEspecie);
-router.delete('/:id', deleteEspecie);
+router.post('/', vetAuth, createEspecie);
+router.patch('/:id', vetAuth, updateEspecie);
+router.delete('/:id', vetAuth, deleteEspecie);
 
 export default router;

@@ -6,10 +6,11 @@ import {
     updateService,
     deleteService
 } from '../controllers/servicio.js'
+import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
-router.get('/', getServices);
-router.post('/',createService);
-router.patch('/:id',updateService);
-router.delete('/:id',deleteService);
+router.get('/', assistVetAut, getServices);
+router.post('/', vetAuth, createService);
+router.patch('/:id', vetAuth, updateService);
+router.delete('/:id', vetAuth, deleteService);
 
 export default router;

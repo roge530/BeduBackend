@@ -11,10 +11,10 @@ export const signUp = (req, res) => {
                 cliente['password_hash'] = 'hashed'
                 res.status(201).json(cliente);
             }) .catch(err => {
-                return res.status(400).json({error: "Elemento(s) inválidos"})
+                return res.status(400).json({error: "Elemento(s) inválidos A"})
             })
         }) .catch(err => {
-            return res.status(400).json({error: "Elemento(s) inválidos"})
+            return res.status(400).json({error: "Elemento(s) inválidos B"})
         })
 }
 
@@ -31,8 +31,8 @@ export const logIn = (req, res) => {
                         return res.status(400).json({error: "Email o contraseña incorrecta"})
                     }
                     if(res1){
-                        const {token, expiresIn} = generateToken(cliente.id)
-                        return res.json({token, expiresIn})
+                        const {token, expiresIn} = generateToken(resultado.id)
+                        return res.json({email: resultado['email'], token, expiresIn})
                     } else {
                         return res.status(400).json({error: "Email o contraseña incorrecta"})
                     }

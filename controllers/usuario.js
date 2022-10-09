@@ -1,4 +1,5 @@
-import {usuario } from '../models/usuario.js'
+import {usuario } from '../models/usuario.js';
+import { generateToken } from '../utils/tokenManager.js';
 import bcrypt from 'bcryptjs';
 
 export const createUsuario = (req, res) => {
@@ -31,7 +32,8 @@ export const logIn = (req, res) => {
                         return res.status(400).json({error: "Usuario o contraseña incorrecta"})
                     }
                     if(res1){
-                        return res.status(200).json({usuario: resultado['usuario'], login: "OK, here's your token :)"})
+                        const {token, expiresIn} = generateToken(resultado['tipo_usuario'])
+                        return res.json({email: resultado['email'], token, expiresIn})
                     } else {
                         return res.status(400).json({error: "Usuario o contraseña incorrecta"})
                     }
