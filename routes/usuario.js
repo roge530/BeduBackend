@@ -92,7 +92,7 @@ router.get('/', adminAuth, getUsuarios);
 *         400:
 *           description: Elemento(s) inválidos                        
 */
-router.post('/signUp',createUsuario);
+router.post('/signUp',adminAuth,createUsuario);
 /**
 *@swagger
 * /usuario/{id}:
