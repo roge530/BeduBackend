@@ -41,18 +41,17 @@ import { adminAuth } from '../middlewares/usersAuth.js';
 *       tipo_usuario:
 *          type: integer
 *       password:  
-*          type: string
+*          type: string 
 * parameters:
-*       UserLogIn:
-*          required:
-*            - usuario
-*            - password
-*          properties:
-*           usuario:
-*               type: string
-*               required: true
-*           password:  
-*               type: string        
+*   UsuarioLogIn:
+*    required:
+*       - usuario
+*       - password
+*    properties:
+*       usuario:
+*         type: string                     
+*       password:
+*         type: string     
 */
 
 /** 
@@ -60,6 +59,8 @@ import { adminAuth } from '../middlewares/usersAuth.js';
  *
  * /usuario/:
  *  get:
+ *    security:            
+*      - bearerAuth: []    
  *    tags: [Usuario]  
  *    summary: Obtiene todos los usuarios registradas
  *    description: Despliega todas los usuarios registrados
@@ -73,6 +74,7 @@ router.get('/', adminAuth, getUsuarios);
 *@swagger
 * /usuario/signUp:
 *  post:
+*    
 *     tags: [Usuario] 
 *     summary: Crea una nuevo usuario
 *     description: Crea el registro del usuario a partir del JSON correspondiente 
@@ -90,7 +92,7 @@ router.get('/', adminAuth, getUsuarios);
 *         400:
 *           description: Elemento(s) inválidos                        
 */
-router.post('/signUp',adminAuth,createUsuario);
+router.post('/signUp',createUsuario);
 /**
 *@swagger
 * /usuario/{id}:
@@ -133,6 +135,8 @@ router.patch('/:id', adminAuth, updateUsuario);
  *        description: Respuesta exitosa
  */
 router.delete('/:id', adminAuth, deleteUsuario);
+
+
 /**
 *@swagger
 * /usuario/logIn:
@@ -147,7 +151,7 @@ router.delete('/:id', adminAuth, deleteUsuario);
 *         in: body         
 *         schema:
 *            type: object
-*            $ref: '#/parameters/UserLogIn'   
+*            $ref: '#/parameters/UsuarioLogIn'   
 *     responses:
 *         200:
 *           description: Usuario dada de alta exitosamente       

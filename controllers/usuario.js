@@ -6,16 +6,16 @@ export const createUsuario = (req, res) => {
     const body = req.body;
     bcrypt.hash(body['password'], 8)
         .then(hashed => {
-            body['password_hash'] = hashed;
+            body['password'] = hashed;
             usuario.create(body).then(usuario => {
-                usuario['password_hash'] = 'hashed'
+                usuario['password'] = 'hashed'
                 res.status(201).json(usuario);
             })
             .catch(err => {
-                return res.status(400).json({error: "Elemento(s) inválidos"})
+                return res.status(400).json({error: `Elemento(s) inválidos 12 ${err}`})
             })
         }) .catch(err => {
-            return res.status(400).json({error: "Elemento(s) inválidos"})
+                return res.status(400).json({error: `Elemento(s) inválidos 13 ${err}`})
         })
 }
 
@@ -27,7 +27,7 @@ export const logIn = (req, res) => {
                 if(!resultado) {
                     return res.status(404).json({error: "Usuario no encontrado"})
                 }
-                bcrypt.compare(body['password'], resultado['password_hash'], function(err, res1) {
+                bcrypt.compare(body['password'], resultado['password'], function(err, res1) {
                     if(err){
                         return res.status(400).json({error: "Usuario o contraseña incorrecta"})
                     }
@@ -60,11 +60,11 @@ export const updateUsuario = (req, res) => {
     if(password) {
         bcrypt.hash(password, 8)
             .then(hashed => {
-                usuarioUpdate['password_hash'] = hashed;
+                usuarioUpdate['password'] = hashed;
                 usuario.update(usuarioUpdate, {where: {id}})
                     .then(updated => {
                         usuario.findByPk(id).then(updated => {
-                            updated['password_hash'] = 'hashed'
+                            updated['password'] = 'hashed'
                             res.status(200).json(updated);
                         })
                     })
@@ -77,7 +77,7 @@ export const updateUsuario = (req, res) => {
         usuario.update(usuarioUpdate, {where: {id}})
         .then(updated => {
             usuario.findByPk(id).then(updated => {
-                updated['password_hash'] = 'hashed'
+                updated['password'] = 'hashed'
                 res.status(200).json(updated);
             })
         })

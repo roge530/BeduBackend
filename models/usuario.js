@@ -46,7 +46,7 @@ export const usuario = sequelize.define('usuario', {
             max: 2
         }
     }, //0 = asistente, 1 = veterinario, 2 = admin
-    password_hash: {
+    password: {
         type: DataTypes.TEXT,
         allowNull: true
     }
