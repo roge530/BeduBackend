@@ -19,7 +19,8 @@ export const getMascota = async (req, res) => {
 
 export const getMascotaByCliente = async (req, res) => {
     const id = req.params.id;
-    const result = await mascota.findAll({where: {clienteId: id} })
+    const result = await mascota.findAll({where: {clienteId: id} });
+    res.status(200).json(result);
 }
 
 

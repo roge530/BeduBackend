@@ -12,7 +12,7 @@ export const signUp = async (req, res) => {
         if (["SequelizeValidationError", "SequelizeUniqueConstraintError"].includes(err.name) ) {
             return res.status(400).json({
                 error: err.errors.map(e => e.message),
-                test: "no c q pasa"
+                test: "Datos invalidos"
             })
         } else {
             throw err;
@@ -26,7 +26,7 @@ export const logIn = async (req, res) => {
     const body =req.body;
     const cliente = await Cliente.findOne({where:{ email: body['email']}});
     if (!cliente){
-        return res.status(404).json({error: "Cliente no encontrado"});
+        return res.status(404).json({error: "Cliente no registrado"});
 
     }
 }

@@ -30,10 +30,9 @@ export const mascota = sequelize.define('mascota',{
 })
 
 mascota.hasMany(cita, {foreignKey: 'mascotaId'});
-mascota.hasOne(especie, {foreignKey: 'especieId'});
+especie.hasMany(mascota, {foreignKey: 'especieId'});
+subespecie.hasMany(mascota, {foreignKey: 'subespecieId'});
 
-mascota.hasOne(subespecie, {foreignKey: 'subespecieId'});
 
-especie.belongsTo(mascota)
 
 
