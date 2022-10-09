@@ -21,7 +21,7 @@ import { adminAuth } from '../middlewares/usersAuth.js';
 *       - celular
 *       - cedula_prof
 *       - tipo_usuario
-*        - password                         
+*       - password                         
 *     properties:
 *       nombre:
 *         type: string
@@ -39,9 +39,20 @@ import { adminAuth } from '../middlewares/usersAuth.js';
 *       cedula_prof:
 *         type: string
 *       tipo_usuario:
-*          type: string
+*          type: integer
 *       password:  
-*          type: string      
+*          type: string
+* parameters:
+*       UserLogIn:
+*          required:
+*            - usuario
+*            - password
+*          properties:
+*           usuario:
+*               type: string
+*               required: true
+*           password:  
+*               type: string        
 */
 
 /** 
@@ -60,7 +71,7 @@ import { adminAuth } from '../middlewares/usersAuth.js';
 router.get('/', adminAuth, getUsuarios);
 /**
 *@swagger
-* /usuario:
+* /usuario/signUp:
 *  post:
 *     tags: [Usuario] 
 *     summary: Crea una nuevo usuario
@@ -79,7 +90,7 @@ router.get('/', adminAuth, getUsuarios);
 *         400:
 *           description: Elemento(s) inválidos                        
 */
-router.post('/signUp', adminAuth, createUsuario);
+router.post('/signUp',adminAuth,createUsuario);
 /**
 *@swagger
 * /usuario/{id}:
@@ -122,6 +133,27 @@ router.patch('/:id', adminAuth, updateUsuario);
  *        description: Respuesta exitosa
  */
 router.delete('/:id', adminAuth, deleteUsuario);
+/**
+*@swagger
+* /usuario/logIn:
+*  post:
+*     tags: [Usuario] 
+*     summary: LogIn del usuario
+*     description:  LogIn del usuario
+*       - application/json
+*     parameters:   
+*       - name: Datos de logIn del usuario
+*         description: JSON con datos del usuario
+*         in: body         
+*         schema:
+*            type: object
+*            $ref: '#/parameters/UserLogIn'   
+*     responses:
+*         200:
+*           description: Usuario dada de alta exitosamente       
+*         400:
+*           description: Elemento(s) inválidos                        
+*/
 router.post('/logIn', logIn);
 
 export default router

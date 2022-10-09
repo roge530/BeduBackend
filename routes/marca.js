@@ -22,7 +22,7 @@ import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
  *     
  * 
  */
-router.get('/', getMarca);
+router.get('/', getMarcas);
 
 /**
 *@swagger
