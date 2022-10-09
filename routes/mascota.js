@@ -7,6 +7,8 @@ import {
     updateMascota,
     deleteMascota
 } from '../controllers/mascota.js'
+import { assistVetAut } from '../middlewares/usersAuth.js';
+import { customerAuth} from '../middlewares/customerAuth.js'
 /**
 * @swagger
 * definitions:
@@ -52,7 +54,9 @@ import {
  *        description: Respuesta exitosa
  *     
  */
-router.get('/:id', getMascota);
+router.get('/:id', assistVetAut, getMascota);
+router.get('/c/:id', assistVetAut, getMascotaByCliente);
+router.post('/clientes', customerAuth, getMascotaByCliente);
 /**
 *@swagger
 * /mascota/:
@@ -78,7 +82,7 @@ router.get('/:id', getMascota);
 *           description: Elemento(s) inválidos                
 *           
 */
-router.post('/', createMascota);
+router.post('/', assistVetAut, createMascota);
 /** 
  *@swagger
  * /mascota/c/{clienteId}:
@@ -123,7 +127,7 @@ router.get('/c/:id', getMascotaByCliente);
 *           description: Elemento(s) inválidos                       
 *           
 */
-router.patch('/:id', updateMascota);
+router.patch('/:id', assistVetAut, updateMascota);
 /** 
  *@swagger
  * /mascota/{id}:
@@ -141,6 +145,6 @@ router.patch('/:id', updateMascota);
  *      '200':
  *        description: Respuesta exitosa
  */
-router.delete('/:id', deleteMascota);
+router.delete('/:id', assistVetAut, deleteMascota);
 
 export default router;

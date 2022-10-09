@@ -6,6 +6,7 @@ import {
     updateService,
     deleteService
 } from '../controllers/servicio.js'
+import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
 /**
 * @swagger
@@ -34,7 +35,7 @@ import {
  *        description: Respuesta exitosa
  *      
  */
-router.get('/', getServices);
+router.get('/', assistVetAut, getServices);
 /**
 *@swagger
 * /servicio:
@@ -56,7 +57,7 @@ router.get('/', getServices);
 *         400:
 *           description: Elemento(s) inválidos                          
 */
-router.post('/',createService);
+router.post('/', vetAuth, createService);
 
 /**
 *@swagger
@@ -80,7 +81,7 @@ router.post('/',createService);
 *         200:
 *           description: Actalización exitosa                   
 */
-router.patch('/:id',updateService);
+router.patch('/:id', vetAuth, updateService);
 
 /** 
  *@swagger
@@ -100,6 +101,6 @@ router.patch('/:id',updateService);
  *      '200':
  *        description: Respuesta exitosa
  */
-router.delete('/:id',deleteService);
+router.delete('/:id', vetAuth, deleteService);
 
 export default router;

@@ -2,20 +2,11 @@ import {Router} from 'express';
 const router = Router();
 import {
     createMarca,
-    getMarca,
+    getMarcas,
     updateMarca,
     deleteMarca
 } from '../controllers/marca.js'
-/**
-* @swagger
-* definitions:
-*   Marca:
-*     required:
-*       - nombre           
-*     properties:
-*       nombre:
-*         type: string
-*/
+import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
 /** 
  *@swagger

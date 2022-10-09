@@ -18,6 +18,8 @@ import {
 *       fecha:
 *         type: string
 */
+import { assistVetAut } from '../middlewares/usersAuth.js';
+import { customerAuth} from '../middlewares/customerAuth.js'
 
 /** 
  *@swagger
@@ -39,7 +41,7 @@ import {
  *     
  * 
  */
-router.get('/:id', getCita);
+router.get('/:id', assistVetAut, getCita);
 /** 
  *@swagger
  * /cita/c/{clienteId}:
@@ -57,7 +59,8 @@ router.get('/:id', getCita);
  *      '201':
  *        description: Respuesta exitosa
  */
-router.get('/c/:id',getCitasByCliente);
+router.get('/c/:id', assistVetAut, getCitasByCliente);
+router.post('/clientes/citas', customerAuth, getCitasByCliente);
 /** 
  *@swagger
  * /cita/m/{mascotaId}:
@@ -75,7 +78,7 @@ router.get('/c/:id',getCitasByCliente);
  *      '200':
  *        description: Respuesta exitosa
  */
-router.get('/m/:id',getCitasByMascota);
+router.get('/m/:id', assistVetAut, getCitasByMascota);
 /**
 *@swagger
 * /cita/:
@@ -101,7 +104,7 @@ router.get('/m/:id',getCitasByMascota);
 *           description: Elemento(s) inválidos                
 *           
 */
-router.post('/', createCita);
+router.post('/', assistVetAut, createCita);
 /**
 *@swagger
 * /cita/{id}:
@@ -126,7 +129,7 @@ router.post('/', createCita);
 *           description: Elemento(s) inválidos            
 *           
 */
-router.patch('/:id', updateCita);
+router.patch('/:id', assistVetAut, updateCita);
 /** 
  *@swagger
  *
@@ -147,6 +150,6 @@ router.patch('/:id', updateCita);
  *     
  * 
  */
-router.delete('/:id', deleteCita);
+router.delete('/:id', assistVetAut, deleteCita);
 
 export default router;

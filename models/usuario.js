@@ -47,14 +47,23 @@ export const usuario = sequelize.define('usuario', {
         }
     }, //0 = asistente, 1 = veterinario, 2 = admin
     password_hash: {
-        type: DataTypes.CHAR(64),
-        allowNull: true
-    },
-    password_salt: {
-        type: DataTypes.CHAR(64),
+        type: DataTypes.TEXT,
         allowNull: true
     }
 });
+
+// usuario.generateJWT = function(user) {
+//     const today = new Date();
+//     const exp = new Date(today);
+//     exp.setDate(today.getDate() + 60); // en dos meses expira
+    
+//     return jwt.sign({
+//         uid: user.id,
+//         up: user.tipo_usuario,
+//         exp: parseInt(exp.getTime() / 1000) // se entrega en segundos
+        
+//     }, secret);
+// }
 
 usuario.hasMany(cita);
 cita.belongsTo(usuario);

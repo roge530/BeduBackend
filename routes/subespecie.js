@@ -8,6 +8,7 @@ import {
     deleteSubespecie,
     getSubespecieByEspecie
 } from '../controllers/subespecie.js';
+import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 /**
 * @swagger
 * definitions:
@@ -36,7 +37,7 @@ import {
  *      400:    
  *        description: "Elemento(s) inválidos"  
  */
-router.get('/', getSubespecies);
+router.get('/', assistVetAut, getSubespecies);
 
 /** 
  *@swagger
@@ -76,7 +77,7 @@ router.get('/:id', getSubespecie);
  *       200:
  *        description: Respuesta exitosa
  */
-router.get('/e/:id', getSubespecieByEspecie);
+router.get('/e/:id', assistVetAut, getSubespecieByEspecie);
 
 /**
 *@swagger
@@ -97,7 +98,7 @@ router.get('/e/:id', getSubespecieByEspecie);
 *         200:
 *           description: Subespecie dada de alta exitosamente                    
 */
-router.post('/', createSubespecie);
+router.post('/', vetAuth, createSubespecie);
 /**
 *@swagger
 * /subespecie/{id}:
@@ -123,7 +124,7 @@ router.post('/', createSubespecie);
 *           description: Elemento(s) inválidos
 *                       
 */
-router.patch('/:id', updateSubespecie);
+router.patch('/:id', vetAuth, updateSubespecie);
 
 /** 
  *@swagger
@@ -143,6 +144,6 @@ router.patch('/:id', updateSubespecie);
  *      '200':
  *        description: Respuesta exitosa
  */
-router.delete('/:id', deleteSubespecie);
+router.delete('/:id', vetAuth, deleteSubespecie);
 
 export default router;

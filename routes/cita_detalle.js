@@ -6,10 +6,11 @@ import {
     updateCita_detalle,
     deleteCita_detalle
 } from'../controllers/cita_detalle.js';
+import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
-router.get('/:id', getCita_detalle);
-router.post('/', createCita_detalle);
-router.patch('/:citaId/:servicioId', updateCita_detalle);
-router.delete('/:citaId/:servicioId', deleteCita_detalle);
+router.get('/:id', assistVetAut, getCita_detalle);
+router.post('/', assistVetAut, createCita_detalle);
+router.patch('/:citaId/:servicioId', assistVetAut, updateCita_detalle);
+router.delete('/:citaId/:servicioId', assistVetAut, deleteCita_detalle);
 
 export default router;

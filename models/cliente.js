@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes, UniqueConstraintError } from 'sequelize'
 import { sequelize } from '../config/db.js'
 
 import {cita} from './cita.js'
@@ -32,30 +32,25 @@ export const Cliente= sequelize.define('cliente',{
     },
 
     email:{
-        type:DataTypes.STRING(100),
+        type:DataTypes.TEXT,
+        unique: true,
+        allowNull: false,
         validate:{
             isEmail:true
         }
+        
     },
 
     telefono:{
         type:DataTypes.STRING,
-        validate: {
-            is:/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*/
-        }
+        allowNull: true
 
     },
 
     password_hash: {
         type: DataTypes.TEXT,
-        allowNull: true,
-    },
-
-    password_salt:{
-        type:DataTypes.TEXT,
-        allowNull:true,
-    },
-
+        allowNull: true
+    }
 })
 
  Cliente.hasMany(cita);

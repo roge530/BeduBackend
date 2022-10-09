@@ -3,7 +3,9 @@ const router = Router()
 import {
     signUp,
     logIn
+    // seeInfo
 } from '../controllers/cliente.js'
+import { vetAuth } from '../middlewares/usersAuth.js';
 /**
 * @swagger
 * parameters:
@@ -119,5 +121,5 @@ router.post('/signUp', signUp);
 *           
 */
 router.post('/logIn', logIn);
-
+// router.get('/', requireToken, seeInfo)
 export default router

@@ -17,10 +17,15 @@ export const getMascota = async (req, res) => {
     res.status(200).json(result);
 }
 
-export const getMascotaByCliente = async (req, res) => {
+export const getMascotaByCliente = (req, res) => {
     const id = req.params.id;
-    const result = await mascota.findAll({where: {clienteId: id} });
-    res.status(200).json(result);
+    mascota.findAll({where: {clienteId: id} })
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            res.status(400).json({error: "No estás autorizado"})
+        })
 }
 
 

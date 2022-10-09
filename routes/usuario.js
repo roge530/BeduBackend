@@ -4,8 +4,10 @@ import {
     createUsuario,
     getUsuarios,
     updateUsuario,
-    deleteUsuario
+    deleteUsuario,
+    logIn
 } from '../controllers/usuario.js'
+import { adminAuth } from '../middlewares/usersAuth.js';
 /**
 * @swagger
 * definitions:
@@ -55,7 +57,7 @@ import {
  *        description: Respuesta exitosa
  *      
  */
-router.get('/', getUsuarios);
+router.get('/', adminAuth, getUsuarios);
 /**
 *@swagger
 * /usuario:
@@ -77,7 +79,7 @@ router.get('/', getUsuarios);
 *         400:
 *           description: Elemento(s) inválidos                        
 */
-router.post('/', createUsuario);
+router.post('/signUp', adminAuth, createUsuario);
 /**
 *@swagger
 * /usuario/{id}:
@@ -100,7 +102,7 @@ router.post('/', createUsuario);
 *         200:
 *           description: Actalización exitosa                   
 */
-router.patch('/:id', updateUsuario);
+router.patch('/:id', adminAuth, updateUsuario);
 /** 
  *@swagger
  *
@@ -119,6 +121,7 @@ router.patch('/:id', updateUsuario);
  *      '200':
  *        description: Respuesta exitosa
  */
-router.delete('/:id', deleteUsuario);
+router.delete('/:id', adminAuth, deleteUsuario);
+router.post('/logIn', logIn);
 
 export default router

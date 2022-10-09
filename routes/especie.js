@@ -7,16 +7,7 @@ import {
     updateEspecie,
     deleteEspecie
 } from '../controllers/especie.js';
-/**
-* @swagger
-* definitions:
-*   Especie:
-*     required:
-*       - especie             
-*     properties:
-*       especie:
-*         type: string   
-*/
+import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
 /** 
  *@swagger
@@ -71,7 +62,7 @@ router.get('/:id', getEspecie);
 *         200:
 *           description: Especie dada de alta exitosamente                    
 */
-router.post('/', createEspecie);
+router.post('/', vetAuth, createEspecie);
 /**
 *@swagger
 * /especie/{id}:
@@ -94,7 +85,7 @@ router.post('/', createEspecie);
 *         200:
 *           description: Actalización exitosa                   
 */
-router.patch('/:id', updateEspecie);
+router.patch('/:id', vetAuth, updateEspecie);
 
 /** 
  *@swagger
@@ -114,6 +105,6 @@ router.patch('/:id', updateEspecie);
  *      '200':
  *        description: Respuesta exitosa
  */
-router.delete('/:id', deleteEspecie);
+router.delete('/:id', vetAuth, deleteEspecie);
 
 export default router;
