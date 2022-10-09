@@ -73,6 +73,8 @@ router.get('/', adminAuth, getUsuarios);
 *@swagger
 * /usuario/signUp:
 *  post:
+*     security:              # <--- ADD THIS
+*      - bearerAuth: []  
 *     tags: [Usuario] 
 *     summary: Crea una nuevo usuario
 *     description: Crea el registro del usuario a partir del JSON correspondiente 
@@ -88,7 +90,7 @@ router.get('/', adminAuth, getUsuarios);
 *         200:
 *           description: Usuario dada de alta exitosamente       
 *         400:
-*           description: Elemento(s) inválidos                        
+*           description: Elemento(s) inválidos  122                      
 */
 router.post('/signUp',adminAuth,createUsuario);
 /**

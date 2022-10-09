@@ -12,10 +12,10 @@ export const createUsuario = (req, res) => {
                 res.status(201).json(usuario);
             })
             .catch(err => {
-                return res.status(400).json({error: "Elemento(s) inválidos"})
+                return res.status(400).json({error: `Elemento(s) inválidos 12 ${err}`})
             })
         }) .catch(err => {
-            return res.status(400).json({error: "Elemento(s) inválidos"})
+                return res.status(400).json({error: `Elemento(s) inválidos 13 ${err}`})
         })
 }
 
