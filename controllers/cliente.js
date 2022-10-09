@@ -1,5 +1,6 @@
+import {Cliente} from '../models/cliente.js'
+import { generateToken } from '../utils/tokenManager.js';
 import bcrypt from 'bcryptjs';
-import {Cliente} from '../models/cliente.js';
 
 export const signUp = (req, res) => {
     const body = req.body;
@@ -30,7 +31,8 @@ export const logIn = (req, res) => {
                         return res.status(400).json({error: "Email o contraseña incorrecta"})
                     }
                     if(res1){
-                        return res.status(200).json({email: resultado['email'], login: "OK, here's your token :)"})
+                        const {token, expiresIn} = generateToken(cliente.id)
+                        return res.json({token, expiresIn})
                     } else {
                         return res.status(400).json({error: "Email o contraseña incorrecta"})
                     }
@@ -39,7 +41,5 @@ export const logIn = (req, res) => {
                 return res.status(400).json({error: "Email o contraseña incorrecta"})
             })
 
-    } else {
-        return res.status(400).json({error: "Email o contraseña incorrecta"})
     }
 }
