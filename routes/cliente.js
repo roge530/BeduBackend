@@ -17,15 +17,18 @@ import { vetAuth } from '../middlewares/usersAuth.js';
 *       - fecha_nacimiento
 *       - direccion
 *       - email
-*       - telefono                
+*       - telefono
+*       - password                
 *     properties:
 *       nombre:
 *         type: string
 *         required: true              
 *       apellido_paterno:
 *         type: string
+*         required: true  
 *       apellido_materno:
 *         type: string
+*         required: true      
 *       fecha_nacimiento:
 *         type: string
 *       direccion:
@@ -36,6 +39,7 @@ import { vetAuth } from '../middlewares/usersAuth.js';
 *         type: string
 *       password:
 *          type: string
+*          required: true     
 *   LogIn:
 *     required:      
 *       - email

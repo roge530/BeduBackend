@@ -28,10 +28,13 @@ import { adminAuth } from '../middlewares/usersAuth.js';
 *         required: true              
 *       apellido_paterno:
 *         type: string
+*         required: true           
 *       apellido_materno:
 *         type: string
+*         required: true       
 *       usuario:
 *         type: string
+*         required: true 
 *       email:
 *         type: string
 *       celular:
@@ -40,8 +43,10 @@ import { adminAuth } from '../middlewares/usersAuth.js';
 *         type: string
 *       tipo_usuario:
 *          type: integer
+*          required: true  
 *       password:  
-*          type: string 
+*          type: string
+*          required: true  
 * parameters:
 *   UsuarioLogIn:
 *    required:
@@ -77,7 +82,7 @@ router.get('/', adminAuth, getUsuarios);
 *    
 *     tags: [Usuario] 
 *     summary: Crea una nuevo usuario
-*     description: Crea el registro del usuario a partir del JSON correspondiente 
+*     description: Crea el registro del usuario a partir del JSON correspondiente. Tipo_usuario 0 = asistente, 1 = veterinario, 2 = admin
 *       - application/json
 *     parameters:   
 *       - name: Datos del usuario
@@ -92,7 +97,7 @@ router.get('/', adminAuth, getUsuarios);
 *         400:
 *           description: Elemento(s) inválidos                        
 */
-router.post('/signUp',createUsuario);
+router.post('/signUp',adminAuth,createUsuario);
 /**
 *@swagger
 * /usuario/{id}:
