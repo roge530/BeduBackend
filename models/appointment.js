@@ -1,13 +1,13 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/db.js'
 
-export const cita = sequelize.define('cita',{
+export const appointment = sequelize.define('appointment',{
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    fecha: {
+    date: {
         type: DataTypes.DATE
     }
 })

@@ -1,18 +1,18 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/db.js'
-import {subespecie} from './subespecie.js'
+import { subspecies } from './subspecies.js'
 
-export const especie = sequelize.define('especie',{
+export const species = sequelize.define('species',{
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    especie: {
+    species: {
         type: DataTypes.STRING
     }
 })
 
 //Añadimos la relación 1 a muchos
 
-subespecie.belongsTo(especie, {foreignkey:'mascotaId'});
+subspecies.belongsTo(species, {foreignkey:'speciesId'});

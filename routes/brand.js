@@ -1,11 +1,11 @@
 import {Router} from 'express';
 const router = Router();
 import {
-    createMarca,
-    getMarcas,
-    updateMarca,
-    deleteMarca
-} from '../controllers/marca.js'
+    createBrand,
+    getBrands,
+    updateBrand,
+    deleteBrand
+} from '../controllers/brand'
 import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
 /** 
@@ -22,7 +22,7 @@ import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
  *     
  * 
  */
-router.get('/', getMarcas);
+router.get('/', getBrands);
 
 /**
 *@swagger
@@ -45,7 +45,7 @@ router.get('/', getMarcas);
 *           description: Marca creada exitosamente                     
 *           
 */
-router.post('/',createMarca);
+router.post('/',createBrand);
 
 /**
 *@swagger
@@ -70,7 +70,7 @@ router.post('/',createMarca);
 *           description: Actalización exitosa                       
 *           
 */
-router.patch('/:id',updateMarca);
+router.patch('/:id',updateBrand);
 
 /** 
  *@swagger
@@ -90,6 +90,6 @@ router.patch('/:id',updateMarca);
  *      '200':
  *        description: Respuesta exitosa
  */
-router.delete('/:id',deleteMarca);
+router.delete('/:id',deleteBrand);
 
 export default router;
