@@ -1,25 +1,25 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/db.js'
-import { cita } from './cita.js';
+import { appointment } from './appointment.js';
 
-export const usuario = sequelize.define('usuario', {
+export const user = sequelize.define('user', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    nombre: {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    apellido_paterno: {
+    last_name_1: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    apellido_materno: {
+    last_name_2: {
         type: DataTypes.STRING
     },
-    usuario: {
+    user: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
@@ -31,13 +31,13 @@ export const usuario = sequelize.define('usuario', {
             isEmail: true
         }
     },
-    celular: {
+    cellphone: {
         type: DataTypes.STRING
     },
-    cedula_prof: {
+    professional_id: {
         type: DataTypes.STRING
     },
-    tipo_usuario: {
+    user_type: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
@@ -52,18 +52,5 @@ export const usuario = sequelize.define('usuario', {
     }
 });
 
-// usuario.generateJWT = function(user) {
-//     const today = new Date();
-//     const exp = new Date(today);
-//     exp.setDate(today.getDate() + 60); // en dos meses expira
-    
-//     return jwt.sign({
-//         uid: user.id,
-//         up: user.tipo_usuario,
-//         exp: parseInt(exp.getTime() / 1000) // se entrega en segundos
-        
-//     }, secret);
-// }
-
-usuario.hasMany(cita);
-cita.belongsTo(usuario);
+user.hasMany(appointment);
+appointment.belongsTo(user);
