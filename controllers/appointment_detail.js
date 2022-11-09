@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import { appointment_detail } from '../models/appointment_detail';
+import { appointment_detail } from '../models/appointment_detail.js';
 
 
 export const createAppointment_detail = async (req, res) => {

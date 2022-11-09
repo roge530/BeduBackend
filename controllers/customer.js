@@ -1,4 +1,4 @@
-import { Customer } from '../models/customer'
+import { Customer } from '../models/customer.js'
 import { generateToken } from '../utils/tokenManager.js';
 import bcrypt from 'bcryptjs';
 

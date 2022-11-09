@@ -1,4 +1,4 @@
-import { Brand } from '../models/brand'
+import { Brand } from '../models/brand.js'
 
 //Create
 export const createBrand =  (req, res) => {

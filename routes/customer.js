@@ -4,7 +4,7 @@ import {
     signUp,
     logIn
     // seeInfo
-} from '../controllers/customer'
+} from '../controllers/customer.js'
 import { vetAuth } from '../middlewares/usersAuth.js';
 /**
 * @swagger

@@ -2,7 +2,7 @@ import { user } from '../models/user.js';
 import { generateToken } from '../utils/tokenManager.js';
 import bcrypt from 'bcryptjs';
 
-export const createuser = (req, res) => {
+export const createUser = (req, res) => {
     const body = req.body;
     bcrypt.hash(body['password'], 8)
         .then(hashed => {
@@ -47,13 +47,13 @@ export const logIn = (req, res) => {
     }
 }
 
-export const getusers = async (req, res) => {
+export const getUsers = async (req, res) => {
     const id = req.params.id;
     const result = await user.findAll();
     res.status(200).json(result);
 }
 
-export const updateuser = (req, res) => {
+export const updateUser = (req, res) => {
     const id = req.params.id;
     const userUpdate = req.body;
     const password = userUpdate['password'];
@@ -87,7 +87,7 @@ export const updateuser = (req, res) => {
     }
 }
 
-export const deleteuser = async (req, res) => {
+export const deleteUser = async (req, res) => {
     const id = req.params.id;
     const deleted = user.destroy(
         {where: {id} }

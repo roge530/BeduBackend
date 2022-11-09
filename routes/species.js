@@ -6,7 +6,7 @@ import {
     getAllSpecies,
     updateSpecies,
     deleteSpecies
-} from '../controllers/species';
+} from '../controllers/species.js';
 import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
 /** 

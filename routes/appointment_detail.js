@@ -5,7 +5,7 @@ import {
     getAppointment_detail,
     updateAppointment_detail,
     deleteAppointment_detail
-} from'../controllers/appointment_detail';
+} from'../controllers/appointment_detail.js';
 import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
 router.get('/:id', assistVetAut, getAppointment_detail);

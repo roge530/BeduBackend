@@ -1,4 +1,4 @@
-import { appointment } from '../models/appointment';
+import { appointment } from '../models/appointment.js';
 
 export const createAppointment =  (req, res) => {
     const body = req.body;

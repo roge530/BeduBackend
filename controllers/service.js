@@ -1,10 +1,10 @@
 
-import { Service } from '../models/service.js'
+import { service } from '../models/service.js'
 
 //Create
 export const createService = (req, res) => {
     const body=req.body;
-    Service.create(body).then(service=>{
+    service.create(body).then(service=>{
         res.status(201).send(service);
     }).catch(err => {
         res.status(400).json({
@@ -15,7 +15,7 @@ export const createService = (req, res) => {
 
 //Get
 export const getServices = async (req, res) => {
-    const services= await Service.findAll();
+    const services= await service.findAll();
     res.status(200).json(services);
 
 }
@@ -24,7 +24,7 @@ export const getServices = async (req, res) => {
 export const updateService = (req, res) => {
     const id=req.params.id;
     const service=req.body;
-    Service.update(service, {where:{id}})
+    service.update(service, {where:{id}})
         .then(updated => {
             Service.findByPk(id)
                 .then(serviceUpdated => {
@@ -41,7 +41,7 @@ export const updateService = (req, res) => {
 //Delete
 export const deleteService = async (req, res) => {
     const id= req.params.id;
-    const deleted = Service.destroy(
+    const deleted = service.destroy(
         {where: {id}}
     );
     res.status(200).json(deleted);
