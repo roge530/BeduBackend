@@ -7,7 +7,7 @@ import {
     deleteAppointment,
     getAppointmentsByCustomer,
     getAppointmentByPet
-} from '../controllers/appointment'
+} from '../controllers/appointment.js'
 /**
 * @swagger
 * definitions:

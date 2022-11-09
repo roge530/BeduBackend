@@ -1,4 +1,4 @@
-import { species } from '../models/species';
+import { species } from '../models/species.js';
 
 export const createSpecies = async (req, res) => {
     const body = req.body;

@@ -18,7 +18,7 @@ export const getSubspecies = async (req, res) => {
     res.status(200).json(result);
 }
 
-export const getSubspeciesByEspecie = async (req, res) => {
+export const getSubspeciesBySpecies = async (req, res) => {
     const id = req.params.id;
     const result = await subspecies.findAll({
         where: {

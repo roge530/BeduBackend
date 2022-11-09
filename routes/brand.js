@@ -5,7 +5,7 @@ import {
     getBrands,
     updateBrand,
     deleteBrand
-} from '../controllers/brand'
+} from '../controllers/brand.js'
 import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
 /** 

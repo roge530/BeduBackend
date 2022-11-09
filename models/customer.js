@@ -1,7 +1,7 @@
 import { DataTypes, UniqueConstraintError } from 'sequelize'
 import { sequelize } from '../config/db.js'
 
-import {appointment, cita} from './appointment.js'
+import {appointment} from './appointment.js'
 import {pet} from './pet.js'
 
 export const Customer= sequelize.define('customer',{
