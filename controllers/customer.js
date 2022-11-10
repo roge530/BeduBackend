@@ -4,18 +4,23 @@ import bcrypt from 'bcryptjs';
 
 export const signUp = (req, res) => {
     const body = req.body;
-    bcrypt.hash(body['password'], 8)
-        .then( hashed => {
-            body['password'] = hashed;
+    Customer.findOne({
+        where: {
+            email: body.email
+        }
+    }).then(customer => {
+        if(customer) {
+            return res.status(400).json({ error: "Email already registered. Please, login."})
+        }
+        else{
             Customer.create(body).then(customer => {
                 customer['password'] = 'hashed'
                 res.status(201).json(customer);
             }) .catch(err => {
-                return res.status(400).json({error: "Invalid data"})
-            })
-        }) .catch(err => {
-            return res.status(400).json({error: "Invalid data"})
-        })
+                        return res.status(400).json({error: "Invalid data"})
+                    })
+        }
+    })
 }
 
 export const logIn = (req, res) => {

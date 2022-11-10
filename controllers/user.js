@@ -4,19 +4,23 @@ import bcrypt from 'bcryptjs';
 
 export const createUser = (req, res) => {
     const body = req.body;
-    bcrypt.hash(body['password'], 8)
-        .then(hashed => {
-            body['password'] = hashed;
+    user.findOne({
+        where: { user: body.user}
+    }).then(User => {
+        if(User) {
+            return res.status(400).json({ error: "Username already exists. Please, login."})
+        } else{
             user.create(body).then(user => {
                 user['password'] = 'hashed'
                 res.status(201).json(user);
             })
             .catch(err => {
-                return res.status(400).json({error: `Invalid element(s) 12 ${err}`})
+                return res.status(400).json({error: `Invalid element(s) ${err}`})
             })
-        }) .catch(err => {
-                return res.status(400).json({error: `Invalid element(s) 13 ${err}`})
-        })
+        }
+    }) .catch(err => {
+        return res.status(400).json({error: `Invalid element(s) ${err}`})
+    })
 }
 
 export const logIn = (req, res) => {
@@ -58,20 +62,20 @@ export const updateUser = (req, res) => {
     const userUpdate = req.body;
     const password = userUpdate['password'];
     if(password) {
-        bcrypt.hash(password, 8)
-            .then(hashed => {
-                userUpdate['password'] = hashed;
-                user.update(userUpdate, {where: {id}})
-                    .then(updated => {
-                        user.findByPk(id).then(updated => {
-                            updated['password'] = 'hashed'
-                            res.status(200).json(updated);
-                        })
-                    })
-                    .catch(err => {
-                        res.status(400).json({error: "Invalid element(s)"})
-                    })
-            })
+        const salt = bcrypt.genSaltSync()
+        let hashed = bcrypt.hashSync(password, salt)
+        userUpdate['password'] = hashed;
+        user.update(userUpdate, {where: {id}})
+        .then(updated => {
+            user.findByPk(id)
+            .then(updated => {
+                updated['password'] = 'hashed'
+                res.status(200).json(updated);
+             })
+        })
+        .catch(err => {
+            res.status(400).json({error: "Invalid data"})
+        })
     }
     else {
         user.update(userUpdate, {where: {id}})
@@ -82,10 +86,11 @@ export const updateUser = (req, res) => {
             })
         })
         .catch(err => {
-            res.status(400).json({error: "Invalid element(s)"})
+            res.status(400).json({error: "Invalid data"})
         })
     }
 }
+
 
 export const deleteUser = async (req, res) => {
     const id = req.params.id;
