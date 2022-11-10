@@ -1,12 +1,12 @@
 import {Router} from 'express'
 const router = Router()
 import {
-    createEspecie,
-    getEspecie,
-    getEspecies,
-    updateEspecie,
-    deleteEspecie
-} from '../controllers/especie.js';
+    createSpecies,
+    getSpecies,
+    getAllSpecies,
+    updateSpecies,
+    deleteSpecies
+} from '../controllers/species.js';
 import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
 
 /** 
@@ -22,7 +22,7 @@ import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
  *        description: Respuesta exitosa
  *      
  */
-router.get('/', getEspecies);
+router.get('/', getAllSpecies);
 /** 
  *@swagger
  *
@@ -41,7 +41,7 @@ router.get('/', getEspecies);
  *       200:
  *        description: Respuesta exitosa
  */
-router.get('/:id', getEspecie);
+router.get('/:id', getSpecies);
 
 /**
 *@swagger
@@ -62,7 +62,7 @@ router.get('/:id', getEspecie);
 *         200:
 *           description: Especie dada de alta exitosamente                    
 */
-router.post('/', vetAuth, createEspecie);
+router.post('/', vetAuth, createSpecies);
 /**
 *@swagger
 * /especie/{id}:
@@ -85,7 +85,7 @@ router.post('/', vetAuth, createEspecie);
 *         200:
 *           description: Actalización exitosa                   
 */
-router.patch('/:id', vetAuth, updateEspecie);
+router.patch('/:id', vetAuth, updateSpecies);
 
 /** 
  *@swagger
@@ -105,6 +105,6 @@ router.patch('/:id', vetAuth, updateEspecie);
  *      '200':
  *        description: Respuesta exitosa
  */
-router.delete('/:id', vetAuth, deleteEspecie);
+router.delete('/:id', vetAuth, deleteSpecies);
 
 export default router;

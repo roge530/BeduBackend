@@ -1,13 +1,13 @@
 import {Router} from 'express'
 const router = Router()
 import {
-    createCita,
-    getCita,
-    updateCita,
-    deleteCita,
-    getCitasByCliente,
-    getCitasByMascota
-} from '../controllers/cita.js'
+    createAppointment,
+    getAppointment,
+    updateAppointment,
+    deleteAppointment,
+    getAppointmentsByCustomer,
+    getAppointmentByPet
+} from '../controllers/appointment.js'
 /**
 * @swagger
 * definitions:
@@ -20,6 +20,7 @@ import {
 */
 import { assistVetAut } from '../middlewares/usersAuth.js';
 import { customerAuth} from '../middlewares/customerAuth.js'
+import { create } from 'domain';
 
 /** 
  *@swagger
@@ -41,7 +42,7 @@ import { customerAuth} from '../middlewares/customerAuth.js'
  *     
  * 
  */
-router.get('/:id', assistVetAut, getCita);
+router.get('/:id', assistVetAut, getAppointment);
 /** 
  *@swagger
  * /cita/c/{clienteId}:
@@ -59,7 +60,7 @@ router.get('/:id', assistVetAut, getCita);
  *      '201':
  *        description: Respuesta exitosa
  */
-router.get('/c/:id', assistVetAut, getCitasByCliente);
+router.get('/c/:id', assistVetAut, getAppointmentsByCustomer);
 /** 
  *@swagger
  * /cita/clientes/citas:
@@ -71,7 +72,7 @@ router.get('/c/:id', assistVetAut, getCitasByCliente);
  *      '201':
  *        description: Respuesta exitosa
  */
-router.post('/clientes/citas', customerAuth, getCitasByCliente);
+router.post('/clientes/citas', customerAuth, getAppointmentsByCustomer);
 /** 
  *@swagger
  * /cita/m/{mascotaId}:
@@ -89,7 +90,7 @@ router.post('/clientes/citas', customerAuth, getCitasByCliente);
  *      '200':
  *        description: Respuesta exitosa
  */
-router.get('/m/:id', assistVetAut, getCitasByMascota);
+router.get('/m/:id', assistVetAut, getAppointmentByPet);
 /**
 *@swagger
 * /cita/:
@@ -115,7 +116,7 @@ router.get('/m/:id', assistVetAut, getCitasByMascota);
 *           description: Elemento(s) inválidos                
 *           
 */
-router.post('/', assistVetAut, createCita);
+router.post('/', assistVetAut, createAppointment);
 /**
 *@swagger
 * /cita/{id}:
@@ -140,7 +141,7 @@ router.post('/', assistVetAut, createCita);
 *           description: Elemento(s) inválidos            
 *           
 */
-router.patch('/:id', assistVetAut, updateCita);
+router.patch('/:id', assistVetAut, updateAppointment);
 /** 
  *@swagger
  *
@@ -161,6 +162,6 @@ router.patch('/:id', assistVetAut, updateCita);
  *     
  * 
  */
-router.delete('/:id', assistVetAut, deleteCita);
+router.delete('/:id', assistVetAut, deleteAppointment);
 
 export default router;

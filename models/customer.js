@@ -1,32 +1,32 @@
 import { DataTypes, UniqueConstraintError } from 'sequelize'
 import { sequelize } from '../config/db.js'
 
-import {cita} from './cita.js'
-import {mascota} from './mascota.js'
+import {appointment} from './appointment.js'
+import {pet} from './pet.js'
 
-export const Cliente= sequelize.define('cliente',{
-    nombre:{
+export const Customer= sequelize.define('customer',{
+    name:{
         type:DataTypes.STRING,
         allowNull: false,
 
     },
 
-    apellido_paterno:{
+    firstSurname:{
         type:DataTypes.STRING,
         allowNull: false,
     },
 
-    apellido_materno:{
+    secondSurname:{
         type:DataTypes.STRING,
         allowNull: false,
     },
 
-    fecha_nacimiento:{
+    birthdate:{
         type: DataTypes.DATEONLY,
         allowNull: true,
     },
 
-    direccion:{
+    address:{
         type:DataTypes.TEXT,
         allowNull: true,
     },
@@ -41,7 +41,7 @@ export const Cliente= sequelize.define('cliente',{
         
     },
 
-    telefono:{
+    phone_number:{
         type:DataTypes.STRING,
         allowNull: true
 
@@ -53,8 +53,8 @@ export const Cliente= sequelize.define('cliente',{
     }
 })
 
- Cliente.hasMany(cita);
- cita.belongsTo(Cliente);
+Customer.hasMany(appointment);
+ appointment.belongsTo(Customer);
 
- Cliente.hasMany(mascota);
- mascota.belongsTo(Cliente);
+ Customer.hasMany(pet);
+ pet.belongsTo(Customer);

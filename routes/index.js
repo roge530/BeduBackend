@@ -1,26 +1,26 @@
 import {Router} from 'express';
 const router = Router();
-import cliente from './cliente.js';
-import usuario from './usuario.js';
-import mascota from './mascota.js';
-import especie from './especie.js';
-import subespecie from './subespecie.js';
-import cita from './cita.js';
-import cita_detalle from './cita_detalle.js';
-import marca from './marca.js'; 
-import servicio from './servicio.js';
+import customer from './customer.js';
+import user from './user.js';
+import pet from './pet.js';
+import species from './species.js';
+import subspecies from './subspecies.js';
+import appointment from './appointment.js';
+import appointment_detail from './appointment_detail.js';
+import brand from './brand.js'; 
+import service from './service.js';
 
 router.get('/', (req, res) => {
     res.json({'info': 'Welcome to VET API!'})
 });
-router.use('/mascota', mascota);
-router.use('/usuario', usuario);
-router.use('/especie', especie);
-router.use('/subespecie', subespecie);
-router.use('/cliente', cliente);
-router.use('/cita', cita);
-router.use('/cita_detalle', cita_detalle);
-router.use('/marca',marca);
-router.use('/servicio',servicio);
+router.use('/pet', pet);
+router.use('/user', user);
+router.use('/species', species);
+router.use('/subspecies', subspecies);
+router.use('/customer', customer);
+router.use('/appointment', appointment);
+router.use('/appointment_detail', appointment_detail);
+router.use('/brand',brand);
+router.use('/service',service);
 
 export {router}
