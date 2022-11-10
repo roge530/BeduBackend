@@ -6,13 +6,17 @@ import { Brand } from './brand.js'
 
 
 export const service=sequelize.define('service',{
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     type:{
         type:DataTypes.TEXT,
         allowNull:false
     },
     price:{
         type:DataTypes.FLOAT,
-
     }
 
 })
