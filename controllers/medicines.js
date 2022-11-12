@@ -2,7 +2,8 @@ import {medicines} from '../models/medicines.js'
 
 export const createMedicine = async (req, res) => {
     const {name, price} = req.body
-    medicines.create(name, price).then(medicine => {
+    const newMedicine = {name, price}
+    medicines.create(newMedicine).then(medicine => {
         return res.status(201).json(medicine)
     }).catch(err => {
         return res.status(400).json({err})
