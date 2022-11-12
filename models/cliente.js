@@ -27,12 +27,12 @@ export const Cliente= sequelize.define('cliente',{
     },
 
     direccion:{
-        type:DataTypes.TEXT,
+        type:DataTypes.STRING,
         allowNull: true,
     },
 
     email:{
-        type:DataTypes.TEXT,
+        type:DataTypes.STRING,
         unique: true,
         allowNull: false,
         validate:{
@@ -48,7 +48,7 @@ export const Cliente= sequelize.define('cliente',{
     },
 
     password: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: true
     }
 })
