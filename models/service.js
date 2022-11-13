@@ -7,7 +7,7 @@ import { Brand } from './brand.js'
 
 export const service=sequelize.define('service',{
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
