@@ -9,6 +9,11 @@ import { router } from './routes/index.js'
 import {swaggerOptions} from './config/swagger.js'
 import swaggerjsDoc from 'swagger-jsdoc'
 import swaggerUI from 'swagger-ui-express'
+import helmet from 'helmet'
+import cors from 'cors'
+
+app.use(helmet())
+app.use(cors())
 
 
 // middlewares
