@@ -1,6 +1,7 @@
 import { DataTypes, UniqueConstraintError } from 'sequelize'
 import { sequelize } from '../config/db.js'
 
+
 import {appointment} from './appointment.js'
 import {pet} from './pet.js'
 
