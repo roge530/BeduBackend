@@ -5,6 +5,8 @@
       "database": "",
       "host": "",
       "dialect": "mysql",
+      "migrationStorage": "json",
+      "migrationStoragePath": "sequelizeMigrations.json",
       "seederStorage": "json",
       "seederStoragePath": "sequelizeSeeds.json"
     },

@@ -106,3 +106,4 @@ dist
 #Sequelize migration config and data generated
 config.json
 sequelizeSeeds.json
+sequelizeMigrations.json

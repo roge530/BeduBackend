@@ -52,10 +52,22 @@ Puedes consultar directamente Trello ya que ahi mismo te redirige al issue que t
 El prototipo es el siguiente:
 ![Diagrama](/diagrams/ERDDiagram1.png)
 
+## How to use Sequelize migration and seeders
+
+New migration: `npx sequelize-cli migration:generate --name create-yourTableName-table`
+New model+migration: `npx sequelize-cli model:generate --name tableName --attributes attribute:type`
+New seeder: `npx sequelize-cli seed:generate --name seederName`
+Replace yourTableName | tableName | attribute:type | seederName with what you need
+
+Run migrations: `npx sequelize-cli db:migrate`
+Run seeders: `npx sequelize-cli db:seed:all`
+
+Undo migrations: `npx sequelize-cli db:migrate:undo`
+Undo seeders: `npx sequelize-cli db:seed:undo:all`
+
 [^1]: Para clonar con SSH debes ya tener configurada tu clave publica SSH de tu equipo y esta debe estar en tu cuenta https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/github-clone-with-ssh-keys
 
 [^2]: Se refiere a que primero se programa la prueba de la funcionalidad antes que la misma funcionalidad, asi al terminar la funcionalidad, la prueba debera ser exitosa. [Mas info](https://www.paradigmadigital.com/dev/tdd-como-metodologia-de-diseno-de-software/)
 
 [^3]: Este concepto se refiere a que existen APIs dedicadas a un unico proceso de negocio. [Mas info](https://microservices.io/)
-
 
