@@ -11,7 +11,17 @@ module.exports = {
       },
       subspecies: {
         type: Sequelize.STRING,
-      }
+      },
+      speciesId:{
+        type:Sequelize.INTEGER,
+        references:{
+          model:'species',
+          key:'id'
+        },
+        onDelete:'CASCADE'
+    },
+    createdAt: Sequelize.DATE,
+    updatedAt: Sequelize.DATE
     })
   },
 

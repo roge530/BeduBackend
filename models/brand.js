@@ -3,7 +3,7 @@ import { sequelize } from '../config/db.js'
 
 export const Brand =sequelize.define('brand',{
     id: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },

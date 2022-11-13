@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('user', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -11,32 +11,39 @@ module.exports = {
     },
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+       
     },
-    last_name_1: {
+    firstSurname: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        
     },
-    last_name_2: {
-        type: Sequelize.STRING
+    secondSurname: {
+        type: Sequelize.STRING,
+        
     },
     user: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        
     },
     email: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
             isEmail: true
-        }
+        },
+        
     },
     cellphone: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        
     },
     professional_id: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        
     },
     user_type: {
         type: Sequelize.INTEGER,
@@ -45,16 +52,21 @@ module.exports = {
         validate: {
             min: 0,
             max: 2
-        }
+        },
+       
     }, //0 = asistente, 1 = veterinario, 2 = admin
     password: {
         type: Sequelize.TEXT,
-        allowNull: true
-    }
+        allowNull: true,
+        
+    },
+    createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE
+    
     })
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('user');
   }
 };
