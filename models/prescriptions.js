@@ -1,6 +1,6 @@
 import {DataTypes} from 'sequelize'
 import { sequelize } from '../config/db.js'
-import {cita_detalle} from './cita_detalle.js'
+import {appointment_detail} from './appointment_detail.js'
 
 export const prescriptions = sequelize.define('presciptions', {
     id: {
@@ -11,5 +11,5 @@ export const prescriptions = sequelize.define('presciptions', {
     }
 })
 
-cita_detalle.hasOne(prescriptions)
-prescriptions.belongsTo(cita_detalle)
+appointment_detail.hasOne(prescriptions)
+prescriptions.belongsTo(appointment_detail)
