@@ -12,11 +12,11 @@ export const user = sequelize.define('user', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    last_name_1: {
+    firstSurname: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    last_name_2: {
+    secondSurname: {
         type: DataTypes.STRING
     },
     user: {
