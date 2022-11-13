@@ -1,9 +1,6 @@
 import {DataTypes} from 'sequelize'
 import { sequelize } from '../config/db.js'
-import {mascota} from './mascota.js'
-import { Cliente } from './cliente.js'
-import {usuario} from './usuario.js'
-
+import {cita_detalle} from './cita_detalle.js'
 
 export const prescriptions = sequelize.define('presciptions', {
     id: {
@@ -14,11 +11,5 @@ export const prescriptions = sequelize.define('presciptions', {
     }
 })
 
-Cliente.hasMany(prescriptions)
-prescriptions.belongsTo(Cliente)
-
-usuario.hasMany(prescriptions)
-prescriptions.belongsTo(usuario)
-
-mascota.hasMany(prescriptions)
-prescriptions.belongsTo(mascota)
+cita_detalle.hasOne(prescriptions)
+prescriptions.belongsTo(cita_detalle)
