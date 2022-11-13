@@ -18,7 +18,17 @@ const swaggerOptions = {
         
       },
 
-    apis: ["./routes/usuario.js","./routes/subespecie.js","./routes/servicio.js","./routes/mascota.js","./routes/marca.js","./routes/cita.js","./routes/cliente.js","./routes/especie.js",]
+    apis: [
+      "./routes/usuario.js",
+      "./routes/subespecie.js",
+      "./routes/servicio.js",
+      "./routes/mascota.js",
+      "./routes/marca.js",
+      "./routes/cita.js",
+      "./routes/cliente.js",
+      "./routes/especie.js",
+      "./routes/medicines.js"
+    ]
     
 }
 
