@@ -103,5 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-#Sequelize migration config
+#Sequelize migration config and data generated
 config.json
+sequelizeSeeds.json

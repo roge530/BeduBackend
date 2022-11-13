@@ -4,7 +4,9 @@
       "password": "",
       "database": "",
       "host": "",
-      "dialect": "mysql"
+      "dialect": "mysql",
+      "seederStorage": "json",
+      "seederStoragePath": "sequelizeSeeds.json"
     },
     "test": {
       "username": "",
