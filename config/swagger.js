@@ -19,15 +19,15 @@ const swaggerOptions = {
       },
 
     apis: [
-      "./routes/usuario.js",
-      "./routes/subespecie.js",
-      "./routes/servicio.js",
-      "./routes/mascota.js",
-      "./routes/marca.js",
-      "./routes/cita.js",
-      "./routes/cliente.js",
-      "./routes/especie.js",
-      "./routes/medicines.js"
+      "./routes/medicines.js",
+      "./routes/user.js",
+      "./routes/subspecies.js",
+      "./routes/service.js",
+      "./routes/pet.js",
+      "./routes/brand.js",
+      "./routes/appointment.js",
+      "./routes/customer.js",
+      "./routes/specie.js",
     ]
     
 }

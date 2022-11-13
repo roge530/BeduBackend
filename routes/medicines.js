@@ -50,6 +50,26 @@ import {
  * 
  */
 router.post('/', createMedicine)
+
+/**
+ * @swagger
+ * 
+ * /medicines/{id}:
+ *  get:
+ *    tags: [Medicine]
+ *    summary: Returns a medicine
+ *    parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        description: Parameter description in CommonMark or HTML.
+ *        schema:
+ *          type: integer
+ *          minimum: 1
+ *    response:
+ *      200:
+ *        description: Data founded
+ */
 router.get('/:id', getMedicine)
 router.post('/:id', updateMedicine)
 router.delete('/:id', deleteMedicine)
