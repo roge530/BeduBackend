@@ -27,8 +27,8 @@ export const Customer= sequelize.define('customer',{
         allowNull: true,
     },
 
-    address:{
-        type:DataTypes.TEXT,
+    direccion:{
+        type:DataTypes.STRING,
         allowNull: true,
     },
 
@@ -49,7 +49,7 @@ export const Customer= sequelize.define('customer',{
     },
 
     password: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: true
     }
 })
