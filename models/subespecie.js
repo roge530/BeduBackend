@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/db.js'
+import { especie } from './especie.js'
 
 export const subespecie = sequelize.define('subespecie',{
     id: {
@@ -12,3 +13,5 @@ export const subespecie = sequelize.define('subespecie',{
         
     }
 })
+
+especie.hasMany(subespecie, {foreignKey: 'especieId'});
