@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize'
 import { sequelize } from '../config/db.js'
 import { appointment } from './appointment.js';
+import bcrypt from 'bcryptjs';
 
 export const user = sequelize.define('user', {
     id: {
@@ -49,8 +50,22 @@ export const user = sequelize.define('user', {
     password: {
         type: DataTypes.TEXT,
         allowNull: true
+    },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
+}, {
+    hooks: {
+      beforeCreate: (user) => {
+        user.createdAt = new Date();
+        user.updatedAt = new Date();
+        const salt = bcrypt.genSaltSync()
+        user.password = bcrypt.hashSync(user.password, salt)
+      },
+      beforeUpdate: function (user, options) {
+        user.updatedAt = new Date();
+      },
     }
-});
+  });
 
 user.hasMany(appointment);
 appointment.belongsTo(user);

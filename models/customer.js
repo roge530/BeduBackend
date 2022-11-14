@@ -1,5 +1,6 @@
 import { DataTypes, UniqueConstraintError } from 'sequelize'
 import { sequelize } from '../config/db.js'
+import bcrypt from 'bcryptjs';
 
 import {appointment} from './appointment.js'
 import {pet} from './pet.js'
@@ -49,9 +50,24 @@ export const Customer= sequelize.define('customer',{
 
     password: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false
+    },
+
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
+}, {
+    hooks: {
+      beforeCreate: (Customer) => {
+        Customer.createdAt = new Date();
+        Customer.updatedAt = new Date();
+        const salt = bcrypt.genSaltSync()
+        Customer.password = bcrypt.hashSync(Customer.password, salt)
+      },
+      beforeUpdate: function (Customer, options) {
+        Customer.updatedAt = new Date();
+      },
     }
-})
+  });
 
 Customer.hasMany(appointment);
  appointment.belongsTo(Customer);
