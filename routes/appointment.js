@@ -10,13 +10,16 @@ import {
 } from '../controllers/appointment.js'
 /**
 * @swagger
-* definitions:
-*   Cita:
-*     required:
-*       - fecha           
-*     properties:
-*       fecha:
-*         type: string
+* components:
+*   schemas:
+*     appointment:
+*       type: object
+*       properties:
+*         date:
+*           type: string
+*           example: '2022-01-01'
+*       required:
+*           - date
 */
 import { assistVetAut } from '../middlewares/usersAuth.js';
 import { customerAuth} from '../middlewares/customerAuth.js'
@@ -24,141 +27,139 @@ import { create } from 'domain';
 
 /** 
  *@swagger
- *
- * /cita/{id}:
- *  get:
- *    tags: [Cita]  
- *    summary: Obtiene cita por medio del id
- *    parameters:
- *    - in: path
- *      name: id
- *      schema:
- *        type: integer
- *      required: true
- *    description: Despliega la cita del id correspondiente
- *    responses:
- *      '200':
- *        description: Respuesta exitosa
+ * paths:
+ *   /appointment/{id}:
+ *       get:
+ *         tags: [Appointment]  
+ *         summary: Gets the appointment by Id
+ *         parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *             type: integer
+ *            required: true
+ *            description: Gets the appointment by Id
+ *         responses:
+ *           '200':
+ *             description: Successful  response
  *     
  * 
  */
 router.get('/:id', assistVetAut, getAppointment);
 /** 
  *@swagger
- * /cita/c/{clienteId}:
- *  get:
- *    tags: [Cita]
- *    summary: Obtiene cita por medio del campo clienteId
+ * paths:
+ *  /appointment/c/{clientId}:
+ *   get:
+ *    tags: [Appointment]
+ *    summary: Get appointment by client's Id
  *    parameters:
  *    - in: path
- *      name: clienteId
+ *      name: clientId
  *      schema:
  *        type: integer
  *      required: true
- *    description: Despliega la cita del cliente seleccionado
+ *    description: Get appointment by client's Id
  *    responses:
  *      '201':
- *        description: Respuesta exitosa
+ *        description: Successful  response
  */
 router.get('/c/:id', assistVetAut, getAppointmentsByCustomer);
 /** 
  *@swagger
- * /cita/clientes/citas:
- *  post:
- *    tags: [Cita]
- *    summary: Obtiene cita por medio del clienteId
- *    description: Despliega la cita del cliente seleccionado
- *    responses:
- *      '201':
- *        description: Respuesta exitosa
+ * paths:
+ *  /appointment/client/appointment:
+ *   post:
+ *     tags: [Appointment]
+ *     summary: Gets the appointment by clientId
+ *     description: Gets the appointment by clientId
+ *     responses:
+ *       '201':
+ *         description: Successful  response
  */
 router.post('/clientes/citas', customerAuth, getAppointmentsByCustomer);
 /** 
  *@swagger
- * /cita/m/{mascotaId}:
+ * /appointment/m/{petId}:
  *  get:
- *    tags: [Cita]  
- *    summary: Obtiene cita por medio del campo mascotaId
+ *    tags: [Appointment]  
+ *    summary: Gets appointment by petId
  *    parameters:
  *    - in: path
- *      name: mascotaId
- *      schema:
- *        type: integer
+ *      name: petId
  *      required: true
- *    description: Despliega la cita de la mascota seleccionada
+ *      schema:
+ *        type: integer  
+ *    description: Gets appointment by petId
  *    responses:
  *      '200':
- *        description: Respuesta exitosa
+ *        description: Successful  response
  */
 router.get('/m/:id', assistVetAut, getAppointmentByPet);
 /**
 *@swagger
-* /cita/:
-*  post:
-*     tags: [Cita] 
-*     summary: Crea una cita 
-*     description: Crea una cita con la fecha
-*     produces:
-*       - application/json
-*     parameters:   
-*       - name: Fecha
-*         description: Fecha de la cita con el formato mm-dd-aaa
-*         in: body
-*         required: true
-*         type: string
-*         schema:
-*           type: object
-*           $ref: '#/definitions/Cita'      
-*     responses:
-*         200:
-*           description: Cita creada exitosamente            
-*         400:
-*           description: Elemento(s) inválidos                
-*           
+* paths:
+*   /appointment:
+*       post:        
+*        tags: [Appointment]
+*        security:            
+*          - bearerAuth: []     
+*        summary: Create an appointment 
+*        description: Create an appointment 
+*        requestBody:
+*           required: true
+*           content:
+*               application/json:
+*                   schema:
+*                       $ref: '#/components/schemas/appointment'      
+*        responses:
+*           '201':
+*               description: Created
 */
 router.post('/', assistVetAut, createAppointment);
 /**
 *@swagger
-* /cita/{id}:
+* /appointment/{id}:
 *  patch:
-*     summary: Edita un cita
-*     description: Editar una cita con una fecha nueva 
-*     tags: [Cita]
+*     summary: Edit an appointment
+*     description: Edit una appointment with a new date
+*     tags: [Appointment]
 *     produces:
 *       - application/json
 *     parameters:
 *       - in: path
 *         name: id
-*       - name: fecha
-*         description: Fecha de la cita
-*         in: body
-*         required: true
-*         type: string
+*     requestBody:
+*       required: true
+*       content:
+*               application/json:
+*                   schema:
+*                       $ref: '#/components/schemas/appointment'
 *     responses:
-*         200:
-*           description: Actalización exitosa            
-*         400:
-*           description: Elemento(s) inválidos            
+*       '200':
+*         description: Successful ful request            
+*       '400':
+*         description: Invalid elements           
 *           
 */
 router.patch('/:id', assistVetAut, updateAppointment);
 /** 
  *@swagger
  *
- * /cita/{id}:
+ * /appointment/{id}:
  *  delete:
- *    tags: [Cita]  
- *    summary: Borra la cita 
+ *    tags: [Appointment]  
+ *    summary: Borra la appointment 
  *    parameters:
  *    - in: path
  *      name: id
  *      schema:
  *        type: integer
  *      required: true
- *    description: Borra la cita seleccionada mediante el id
+ *    description: Borra la appointment seleccionada mediante el id
  *    responses:
  *      '200':
- *        description: Respuesta exitosa
+ *        description: Successful  response
  *     
  * 
  */

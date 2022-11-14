@@ -14,12 +14,12 @@ import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
  *
  * /especie/:
  *  get:
- *    tags: [Especie]  
+ *    tags: [Species]  
  *    summary: Obtiene todas las especies registradas
  *    description: Despliega todas las especies registradas
  *    responses:
  *       200:
- *        description: Respuesta exitosa
+ *        description: Success response
  *      
  */
 router.get('/', getAllSpecies);
@@ -28,7 +28,7 @@ router.get('/', getAllSpecies);
  *
  * /especie/{id}:
  *  get:
- *    tags: [Especie]  
+ *    tags: [Species]  
  *    summary: Obtiene la especie por medio del id
  *    parameters:
  *    - in: path
@@ -39,7 +39,7 @@ router.get('/', getAllSpecies);
  *    description: Despliega la especie del id correspondiente
  *    responses:
  *       200:
- *        description: Respuesta exitosa
+ *        description: Success response
  */
 router.get('/:id', getSpecies);
 
@@ -47,7 +47,7 @@ router.get('/:id', getSpecies);
 *@swagger
 * /especie:
 *  post:
-*     tags: [Especie] 
+*     tags: [Species] 
 *     summary: Crea una nueva especie
 *     description: Crea el registro de la especie a partir del JSON correspondiente 
 *       - application/json
@@ -69,7 +69,7 @@ router.post('/', vetAuth, createSpecies);
 *  patch:
 *     summary: Edita una especie
 *     description: Editar una especie con nueva informacion
-*     tags: [Especie]
+*     tags: [Species]
 *     produces:
 *       - application/json
 *     parameters:
@@ -92,7 +92,7 @@ router.patch('/:id', vetAuth, updateSpecies);
  *
  * /especie/{id}:
  *  delete:
- *    tags: [Especie]  
+ *    tags: [Species]  
  *    summary: Borra la especie  
  *    parameters:
  *    - in: path
@@ -103,7 +103,7 @@ router.patch('/:id', vetAuth, updateSpecies);
  *    description: Borra la especie seleccionada mediante el id
  *    responses:
  *      '200':
- *        description: Respuesta exitosa
+ *        description: Success response
  */
 router.delete('/:id', vetAuth, deleteSpecies);
 

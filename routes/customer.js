@@ -8,8 +8,10 @@ import {
 import { vetAuth } from '../middlewares/usersAuth.js';
 /**
 * @swagger
-* parameters:
-*   SignUp:
+* components:
+*  schemas:
+*   SignUpCustomer:
+*     type: object
 *     required:
 *       - nombre
 *       - apellido_paterno
@@ -22,7 +24,7 @@ import { vetAuth } from '../middlewares/usersAuth.js';
 *     properties:
 *       nombre:
 *         type: string
-*         required: true              
+*         example:'ola'             
 *       apellido_paterno:
 *         type: string
 *         required: true  
@@ -40,7 +42,8 @@ import { vetAuth } from '../middlewares/usersAuth.js';
 *       password:
 *          type: string
 *          required: true     
-*   LogIn:
+*   LogInCustomer:    
+*     type: object    
 *     required:      
 *       - email
 *       - password                
@@ -49,8 +52,9 @@ import { vetAuth } from '../middlewares/usersAuth.js';
 *         type: string
 *       password:
 *         type: string
-* definitions:
+* 
 *   Cliente:
+*     type: object  
 *     required:
 *       - nombre
 *       - apellido_paterno
@@ -76,7 +80,7 @@ import { vetAuth } from '../middlewares/usersAuth.js';
 *       telefono:
 *         type: string
 *       password:
-*          type: string          
+*         type: string          
 */
 
 /**

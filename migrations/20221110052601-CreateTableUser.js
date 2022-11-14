@@ -61,7 +61,7 @@ module.exports = {
         
     },
     createdAt: Sequelize.DATE,
-      updatedAt: Sequelize.DATE
+    updatedAt: Sequelize.DATE
     
     })
   },

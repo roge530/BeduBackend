@@ -1,5 +1,5 @@
 const swaggerOptions = {
-    swaggerDefinition: {
+    definition: {
         openapi: '3.0.1',
         info: {
             version: "1.0.0",
@@ -15,10 +15,15 @@ const swaggerOptions = {
             }
           }
         },
+        security: [
+          {
+            bearerAuth: []
+          }
+        ]
         
       },
 
-    apis: ["./routes/usuario.js","./routes/subespecie.js","./routes/servicio.js","./routes/mascota.js","./routes/marca.js","./routes/cita.js","./routes/cliente.js","./routes/especie.js",]
+    apis: ["./routes/user.js","./routes/suspecies.js","./routes/service.js","./routes/pet.js","./routes/brand.js","./routes/appointment.js","./routes/client.js","./routes/species.js",]
     
 }
 

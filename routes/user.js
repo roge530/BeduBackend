@@ -10,94 +10,101 @@ import {
 import { adminAuth } from '../middlewares/usersAuth.js';
 /**
 * @swagger
-* definitions:
-*   User:
-*     required:
-*       - name
-*       - last_name_1
-*       - last_name_2
-*       - user
-*       - email
-*       - cellphone
-*       - professional_id
-*       - user_type
-*       - password                         
-*     properties:
-*       name:
-*         type: string
-*         required: true              
-*       last_name_1:
-*         type: string
-*         required: true           
-*       last_name_2:
-*         type: string
-*         required: true       
-*       user:
-*         type: string
-*         required: true 
-*       email:
-*         type: string
-*       cellphone:
-*         type: string
-*       professional_id:
-*         type: string
-*       user_type:
-*          type: integer
-*          required: true  
-*       password:  
-*          type: string
-*          required: true  
-* parameters:
-*   UserLogIn:
-*    required:
-*       - user
-*       - password
-*    properties:
-*       user:
-*         type: string                     
-*       password:
-*         type: string     
+* components:
+*   schemas:
+*     user:
+*       type: object
+*       properties:
+*         name:
+*           type: string
+*           example: 'Adrian'
+*         firstSurname:
+*           type: string
+*           example: 'Morales'
+*         secondSurname:
+*           type: string
+*           example: 'Morales'
+*         user:
+*           type: string
+*           example: 'admin'
+*         email:
+*           type: string
+*           example: 'admin@test.com'
+*         cellphone:
+*           type: string
+*           example: '2224562776'
+*         professional_id:
+*           type: string
+*           example: 'Morales'
+*         user_type:
+*           type: integer
+*           example: 1
+*         password:
+*           type: string
+*           example: 'user'
+*
+*       required:
+*           - name
+*           - firstSurname
+*           - secondSurname
+*           - user
+*           - email
+*           - cellphone
+*           - professional_id
+*           - user_type
+*           - password      
+*
+*     userLogIn:
+*       type: object
+*       properties:
+*           user:
+*             type: string
+*             example: 'admin'
+*           password:
+*             type: string
+*             example: 'user' 
+*       required:
+*           - user
+*           - password
+*
 */
 
 /** 
  *@swagger
  *
  * /user/:
- *  get:
- *    security:            
-*      - bearerAuth: []    
+ *  get:  
  *    tags: [User]  
  *    summary: Return all the users' entries
  *    description: Return all the users' entries
  *    responses:
- *       200:
+ *      '200':
  *        description: Successful response
  *      
  */
-router.get('/', adminAuth, getUsers);
+//router.get('/', adminAuth, getUsers);
+    router.get('/',adminAuth, getUsers);
 /**
 *@swagger
-* /user/signUp:
-*  post:
-*    
+* paths:
+*  /user/signUp:
+*    post:    
 *     tags: [User] 
 *     summary: Create a new user
 *     description: Create user register. user_type 0 = vet assistant, 1 = vet, 2 = admin
-*       - application/json
-*     parameters:   
-*       - name: User data
-*         description: Data user JSON
-*         in: body         
-*         schema:
-*            type: object
-*            $ref: '#/definitions/User'   
+*     requestBody:
+*        required: true
+*        content:
+*            application/json:
+*                schema:
+*                    $ref: '#/components/schemas/user'      
 *     responses:
-*         200:
-*           description: User created successfuly     
-*         400:
-*           description: Invalid elements                        
+*        '201':
+*            description: Created user                       
 */
-router.post('/signUp',adminAuth,createUser);
+
+//router.post('/signUp',adminAuth,createUser);
+router.post('/signUp',createUser);
 /**
 *@swagger
 * /user/{id}:
@@ -144,24 +151,25 @@ router.delete('/:id', adminAuth, deleteUser);
 
 /**
 *@swagger
-* /user/logIn:
-*  post:
-*     tags: [User] 
-*     summary: User LogIn
-*     description: User LogIn 
-*       - application/json
-*     parameters:   
-*       - name: Data user logIn
-*         description: Data user logIn JSON 
-*         in: body         
-*         schema:
-*            type: object
-*            $ref: '#/parameters/UserLogIn'   
-*     responses:
-*         200:
-*           description: Successfully created user        
-*         400:
-*           description: Invalid elements                        
+* paths:
+*  /user/logIn:
+*    post:
+*      tags: [User] 
+*      summary: User LogIn
+*      description: User LogIn 
+*      requestBody:
+*           required: true
+*           content:
+*               application/json:
+*                   schema:
+*                       $ref: '#/components/schemas/userLogIn'      
+*      responses:
+*           '201':
+*              description: Created
+*           '200':
+*             description: Successfully created user        
+*           '400':
+*              description: Invalid elements                        
 */
 router.post('/logIn', logIn);
 

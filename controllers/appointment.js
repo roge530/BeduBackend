@@ -32,7 +32,7 @@ export const getAppointmentByPet = async (req, res) => {
 export const updateAppointment = (req, res) => {
     const id = req.params.id;
     const appointmentUpdate = req.body;
-    cita.update(appointmentUpdate, {where: {id}})
+    appointment.update(appointmentUpdate, {where: {id}})
         .then(updated => {
             appointment.findByPk(id)
                 .then(updated => {

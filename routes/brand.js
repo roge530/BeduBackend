@@ -7,67 +7,79 @@ import {
     deleteBrand
 } from '../controllers/brand.js'
 import { vetAuth, assistVetAut } from '../middlewares/usersAuth.js';
+/**
+* @swagger
+* components:
+*   schemas:
+*     brand:
+*       type: object
+*       properties:
+*         name:
+*           type: string
+*           example: 'Royal Cannin'
+*       required:
+*           - name
+*/
 
 /** 
  *@swagger
- *
- * /marca/:
- *  get:
- *    tags: [Marca]  
- *    summary: Obtiene las marcas registradas
- *    description: Despliega todas las marcas registradas
- *    responses:
- *      '200':
- *        description: Respuesta exitosa
- *     
+ * path:
+ *  /brand/:
+ *      get:
+ *       tags: [Brand]  
+ *       summary: Gets the all the brands entries
+ *       description: Gets the all the brands entries
+ *       responses:
+ *         '200':
+ *           description: Successful response
  * 
  */
 router.get('/', getBrands);
 
 /**
 *@swagger
-* /marca/:
-*  post:
-*     tags: [Marca] 
-*     summary: Crea una marca 
-*     description: Crea una marca
-*     produces:
-*       - application/json
-*     parameters:   
-*       - name: Marca
-*         description: Nombre de la marca a dar de alta
-*         in: body
-*         schema:
-*           type: object
-*           $ref: '#/definitions/Marca'      
-*     responses:
-*         200:
-*           description: Marca creada exitosamente                     
+* paths:
+*  /brand/:
+*    post:
+*       tags: [Brand] 
+*       summary: Create a brand 
+*       description: Create a brand 
+*       produces:
+*         - application/json
+*       requestBody:
+*           required: true
+*           content:
+*               application/json:
+*                   schema:
+*                       $ref: '#/components/schemas/brand'     
+*       responses:
+*           200:
+*             description: Brand sucessfuly cerated                     
 *           
 */
 router.post('/',createBrand);
 
 /**
 *@swagger
-* /marca/{id}:
+* /brand/{id}:
 *  patch:
-*     summary: Edita un marca
-*     description: Editar una marca con informacion nueva
-*     tags: [Marca]
+*     summary: Edit a new brand
+*     description: Edit a new brand
+*     tags: [Brand]
 *     produces:
 *       - application/json
 *     parameters:
 *       - in: path
 *         name: id
-*       - name: Informacion de la marca
-*         description: Datos nuevos de la marca
+*       - name: Brand information
+*         description: New brand data
 *         in: body
 *         schema: 
 *           type: object
-*           $ref: '#/definitions/Marca' 
+*           $ref: '#/components/schemas/brand'
 *     responses:
 *         200:
-*           description: Actalización exitosa                       
+*           description: Successful edited                      
 *           
 */
 router.patch('/:id',updateBrand);
@@ -75,20 +87,20 @@ router.patch('/:id',updateBrand);
 /** 
  *@swagger
  *
- * /marca/{id}:
+ * /brand/{id}:
  *  delete:
- *    tags: [Marca]  
- *    summary: Borra la marca  
+ *    tags: [Brand]  
+ *    summary: Delete the brand  
  *    parameters:
  *    - in: path
  *      name: id
  *      schema:
  *        type: integer
  *      required: true
- *    description: Borra la marca seleccionada mediante el id
+ *    description: Delete the brand by id
  *    responses:
  *      '200':
- *        description: Respuesta exitosa
+ *        description: Successful response
  */
 router.delete('/:id',deleteBrand);
 
