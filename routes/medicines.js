@@ -62,13 +62,15 @@ router.post('/', createMedicine)
  *      - name: id
  *        in: path
  *        required: true
- *        description: Parameter description in CommonMark or HTML.
+ *        description: Sends the medicine id to get the information
  *        schema:
  *          type: integer
  *          minimum: 1
  *    response:
  *      200:
  *        description: Data founded
+ *      400:
+ *        description: Server error
  */
 router.get('/:id', getMedicine)
 router.post('/:id', updateMedicine)

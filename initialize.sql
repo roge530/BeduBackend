@@ -1,17 +1,17 @@
 --Creacion de usuarios
 --Todos los registros en la tabla usuarios llevan como password: usuario
-insert into usuarios (nombre, apellido_paterno, apellido_materno, usuario, email, tipo_usuario, "createdAt", "updatedAt", password) 
+insert into users (name, last_name_1, last_name_2, user, email, user_type, createdAt, updatedAt, password) 
 values 
- ('admin', 'admin', 'admin', 'admin', 'admin@mail.com', 2, '01/01/2022', '01/01/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
- ('vet', 'vet', 'vet', 'vet', 'vet@mail.com', 1, '01/01/2022', '01/01/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
- ('asistente', 'asistente', 'asistente', 'asistente', 'asistente@gmail.com', 0, '01/01/2022', '01/01/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
- ('Tory', 'Kaaskooper', 'Lace', 'tlace2', 'tlace2@slideshare.net', 1, '01/01/2022', '07/20/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
- ('Midge', 'Kleehuhler', 'Edgler', 'medgler3', 'medgler3@barnesandnoble.com', 0, '08/30/2021', '04/10/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
- ('Ber', 'Giacomuzzi', 'Iston', 'biston4', 'biston4@creativecommons.org', 1, '08/26/2021', '12/11/2021', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
- ('Gertruda', 'Challace', 'Thursfield', 'gthursfield5', 'gthursfield5@sfgate.com', 0, '09/03/2022', '04/15/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
- ('Lotty', 'MacGiolla', 'Friatt', 'lfriatt6', 'lfriatt6@theatlantic.com', 0, '10/06/2021', '09/06/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
- ('Cristobal', 'Pethrick', 'Rubenov', 'crubenov7', 'crubenov7@indiatimes.com', 1, '11/09/2021', '11/19/2021', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
- ('Brock', 'Lurcock', 'Pawsey', 'bpawsey8', 'bpawsey8@columbia.edu', 0, '05/26/2022', '06/08/2022', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC')
+ ('admin', 'admin', 'admin', 'admin', 'admin@mail.com', 2, '2022-01-01 00:00:00.000000', '2022-01-01 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
+ ('vet', 'vet', 'vet', 'vet', 'vet@mail.com', 1, '2022-01-01 00:00:00.000000', '2022-01-01 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
+ ('asistente', 'asistente', 'asistente', 'asistente', 'asistente@gmail.com', 0, '2022-01-01 00:00:00.000000', '2022-01-01 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
+ ('Tory', 'Kaaskooper', 'Lace', 'tlace2', 'tlace2@slideshare.net', 1, '2022-01-01 00:00:00.000000', '2022-07-20 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
+ ('Midge', 'Kleehuhler', 'Edgler', 'medgler3', 'medgler3@barnesandnoble.com', 0, '2021-08-30 00:00:00.000000', '2022-04-10 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
+ ('Ber', 'Giacomuzzi', 'Iston', 'biston4', 'biston4@creativecommons.org', 1, '2021-08-26 00:00:00.000000', '2021-12-11 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
+ ('Gertruda', 'Challace', 'Thursfield', 'gthursfield5', 'gthursfield5@sfgate.com', 0, '2022-09-03 00:00:00.000000', '2022-04-15 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
+ ('Lotty', 'MacGiolla', 'Friatt', 'lfriatt6', 'lfriatt6@theatlantic.com', 0, '2021-10-06 00:00:00.000000', '2022-09-06 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
+ ('Cristobal', 'Pethrick', 'Rubenov', 'crubenov7', 'crubenov7@indiatimes.com', 1, '2022-11-09 00:00:00.000000', '2022-11-19 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC'),
+ ('Brock', 'Lurcock', 'Pawsey', 'bpawsey8', 'bpawsey8@columbia.edu', 0, '2022-05-26 00:00:00.000000', '2022-06-08 00:00:00.000000', '$2a$08$C3aZszLN.NP5lMRxU2ICL.bY5gGo2HWfbobO0luVwyKmlBxcaBAoC');
 
 
 

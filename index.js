@@ -28,7 +28,7 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
 async function main() {
     try {
-        await sequelize.sync({force: process.env.FORCESYNC});
+        //await sequelize.sync({force: process.env.FORCESYNC});
         app.listen(PORT, () => {
             console.log(`App running on port ${PORT}.`)
         })
